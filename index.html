@@ -15,7 +15,7 @@
   <body style='padding:0; border:0; margin:0; color:black; background-color:white;  width:355px; height:640px;'>
 
 <p>chavitvirte</p>
-<center><a href='Javasript: scan_bar_code();'>ბარკოდის წაკითხვა</a>
+<center><a href='Javasript: scan_bar_code();'>ბარკოდის წაკითხვა</a></center>
 <script>
 
 
@@ -71,8 +71,7 @@ function scan_bar_code()
 
 	cordova.plugins.barcodeScanner.scan(
       function (result) {
-          alert("cavikitxe: " + result.text + "\n" +
-                "formati: " + result.format + "\n");
+          alert("cavikitxe: " + result.text + "\n" +   "formati: " + result.format + "\n");
       },
       function (error) {
           alert("Scanning failed: " + error);
@@ -86,7 +85,6 @@ function scan_bar_code()
           prompt : "Place a barcode inside the scan area", // Android
           resultDisplayDuration: 500, // Android, display scanned text for X ms. 0 suppresses it entirely, default 1500
           disableAnimations : true, // iOS
-		   orientation : "landscape",
           disableSuccessBeep: true // iOS and Android
       }
    );
