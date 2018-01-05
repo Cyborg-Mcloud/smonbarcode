@@ -60,14 +60,14 @@ document.addEventListener("deviceready", onDeviceReady, false);
 
 function onError()
 	{
-		onDeviceReady() ;
+//		onDeviceReady() ;
 //	alert("error");
 	}
 
 function scan_bar_code()
 {
 
-	cordova.plugins.barcodeScanner.scan(
+	barcodeScanner.scan(
       function (result) {
           alert("We got a barcode\n" +
                 "Result: " + result.text + "\n" +
