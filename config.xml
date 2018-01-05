@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<widget xmlns     = "http://www.w3.org/ns/widgets"
+		xmlns:gap = "http://phonegap.com/ns/1.0"
+        id        = "com.designge.smonbarcode"
+	    versionCode="1" 
+        version   = "0.0.5"
+		package="com.designge.smonbarcode">
+    <name>SMonBarcode</name>
+
+
+	<icon src="logo.png" />
+
+
+<access origin="*" />
+<allow-intent href="*" />
+<allow-navigation href="*" />
+
+ <platform name="android">
+        <preference name="android-minSdkVersion" value="18" />
+        <allow-intent href="market:*" />
+    </platform>
+<plugin name="phonegap-plugin-barcodescanner">
+  <param name="CAMERA_USAGE_DESCRIPTION" value="To scan barcodes." />
+</plugin>
+
+<preference name="android-build-tool" value="gradle" /> 
+
+	<preference name="phonegap-version" value="cli-7.0.1" /> 
+	<preference name="orientation" value="portrait" />
+	<preference name="target-device"              value="handset" />
+<!--	<preference name="fullscreen" value="true" />-->
+	<preference name="webviewbounce" value="true" />  
+	<preference name="DisallowOverscroll" value="false" />
+	<preference name="stay-in-webview"            value="true" /> 
+
+<preference name="exit-on-suspend"            value="false" />          
+<preference name="show-splash-screen-spinner" value="false" />    
+<preference name="auto-hide-splash-screen"    value="false" />
+<preference name="disable-cursor"             value="false" />
+<preference name="android-minSdkVersion"      value="11" />         
+<preference name="android-installLocation"    value="auto" />
+<preference name="EnableViewportScale"    value="true" />
+
+	<description>
+    S-Monitoring Barcode Reader
+    </description>
+	
+
+    <author href="http://design.ge" email="uabashidze@gmail.com">
+        Cyborg-Mcloud
+    </author>
+
+
+ 
+    <plugins>
+
+    </plugins>
+
+
+
+	<feature name="App">
+	  <param name="android-package" value="com.designge.smonbarcode"/>
+	</feature>
+	
+  <feature name="File">
+        <param name="android-package" value="org.apache.cordova.file.FileUtils" />
+    </feature>
+
+<feature name="Camera">
+    <param name="android-package" value="org.apache.cordova.camera.CameraLauncher" />
+    <param name="ios-package" value="CDVCamera" />
+</feature>
+
+
+<feature name="http://api.phonegap.com/1.0/geolocation"/>
+	<feature name="http://api.phonegap.com/1.0/device" />
+<gap:plugin name="cordova-plugin-geolocation" source="npm"/>
+<gap:plugin name="cordova-plugin-camera" source="npm"  />
+<gap:plugin name="cordova-plugin-device" source="npm" />
+
+	<gap:plugin name="cordova-plugin-inappbrowser"  source="npm" />
+	<gap:plugin name="cordova-plugin-whitelist" source="npm" />
+	<feature name="http://api.phonegap.com/1.0/file" />
+
+
+	<gap:plugin name="cordova-plugin-inappbrowser"  source="npm" />
+
+</widget>

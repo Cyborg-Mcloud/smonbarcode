@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
+  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>SMonBarcode</title>
+
+	<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+
+  </head>
+  <style>
+	body {color:white; margin:0px; padding:0px;}
+	a {text-decoration:none; color:white;}
+  </style>
+  <body style='padding:0; border:0; margin:0; background-color:#244697;'>
+
+
+<script>
+
+
+var MyLat;
+var MyLong;
+var MyAlt;
+var MyHead;
+var MySpeed;
+var MyAcc;
+
+function onDeviceReady() 
+	{
+    document.removeEventListener('deviceready', onDeviceReady, false);
+
+	console.log("device ready, getting position");
+	navigator.geolocation.getCurrentPosition(onSuccess, onError, {enableHighAccuracy: true,  maximumAge:0});
+	var opts = { timeout: 5000, enableHighAccuracy: true, maximumAge:0};
+	watchID = navigator.geolocation.watchPosition(onSuccess, onError, opts);
+	
+
+    }
+
+
+function onSuccess(position) 
+	{
+	console.log("on GPS success");
+
+	MyLat=position.coords.latitude ;
+	MyLong=position.coords.longitude ;
+	MyAlt=position.coords.altitude ;
+	MyHead=position.coords.heading ;
+	MySpeed=position.coords.speed ;
+	MyAcc=position.coords.accuracy;
+
+	console.log(MyLat+ " - "+MyLong);
+
+
+
+    }
+
+document.addEventListener("deviceready", onDeviceReady, false);
+
+function onError()
+	{
+		onDeviceReady() ;
+//	alert("error");
+	}
+
+
+
+
+</script>
+
+</body>
+
+
+
+</html>
