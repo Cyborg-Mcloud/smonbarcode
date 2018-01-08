@@ -91,7 +91,7 @@ function add_scan(barcode)
 	{
 	visits=cc("work");
 	var d = new Date();
-	var curdate=d.getFullYear()+"-"+d.getMonth()+"-"+d.getDay()+" "+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds();
+	var curdate=d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()+" "+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds();
 
 	var nscan=barcode+"|"+curdate;
 	visits+=nscan+",";
