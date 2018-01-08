@@ -236,11 +236,11 @@ function login()
 
 </div>
 
-<div id='wait_div'>
+<div id='wait_div' style="display:none;">
 	 მიმდინარეობს მონაცემების გადაგზავნა
 </div>
 
-<div id='menu_div' style="visibility:hidden;">
+<div id='menu_div' style="display:none;">
 <p align=right>მოგასლმებით: <span id='muname'></span>, <a href="Javascript: logout();">გამოსვლა</a></p>
 <center>
 	</p><a href="Javascript: scan_bar_code();">ლოკაციის სკანირება</a></p>
@@ -251,6 +251,7 @@ function login()
 </body>
 
 <script>
+console.log("cookies: "+document.cookie);
 var cuser="";
 var unid="";
 if (cc("unid")=="")
