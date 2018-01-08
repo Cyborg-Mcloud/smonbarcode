@@ -64,7 +64,8 @@ function scan_bar_code()
 
 	cordova.plugins.barcodeScanner.scan(
       function (result) {
-          alert("cavikitxe: " + result.text + "\n" +   "formati: " + result.format + "\n");
+		  add_scan(result.text);
+         // alert("cavikitxe: " + result.text + "\n" +   "formati: " + result.format + "\n");
       },
       function (error) {
           alert("Scanning failed: " + error);
@@ -85,8 +86,28 @@ function scan_bar_code()
 
 //  formats : "QR_CODE,PDF_417", // default: all but PDF_417 and RSS_EXPANDED
 //          orientation : "landscape", // Android only (portrait|landscape), default unset so it rotates with the device
+var visits="";
+function add_scan(barcode)
+	{
+	visits=cc("work");
+	var curdate=Date.getYear()+"-"+Date.getMonth()+"-"+Date.getDay()+" "+Date.getHours()+":"+Date.getMinutes()+":"+Date.getSeconds();
 
+	var nscan=barcode+"|"+curdate;
+	visits+=nscan+",";
+	setc("work",visits);
+	send_visits();
+	}
 
+function send_visits()
+	{
+	visits=cc("work");
+	if (visits!="")
+		{
+		var mdata="unid="+unid+"&visit=1&uname="+cuser+"&visits="+visits;
+		sw("wait_div");
+		send_data(mdata);
+		}
+	}
 
 function setc(mname, mval)
 	{
@@ -142,16 +163,17 @@ else {alert('Your browser does not support XMLHTTP!');}
 
 var curdata="";
 var data_sent=0;
+var attempts=0;
 brainhttp.onreadystatechange=brain_recv;
 
 function send_data(mdata)
 	{
-	
+	attempts=0;
 	curdata=mdata;
 	console.log("sending data: "+curdata);
 	data_sent=0;
 	ajax_send();
-	setTimeout("resend();",5000);
+	setTimeout("resend();",3000);
 	
 	}
 
@@ -159,9 +181,20 @@ function resend()
 	{
 	if (data_sent==0)
 		{
-		console.log("repeat: "+curdata+ " - "+data_sent);
-		ajax_send();
-		setTimeout("resend();",5000);
+		if (attempts<3)
+			{
+			attempts++;
+			console.log("repeat: "+curdata+ " - "+data_sent);
+			ajax_send();
+			setTimeout("resend();",3000);
+			}
+		else
+			{
+			curdata="";
+			data_sent=1;
+			check_user();
+		
+			}
 		}
 	}
 function ajax_send()
@@ -181,7 +214,7 @@ function brain_recv()
 		b_recv=brainhttp.responseText;
 	
 		console.log("recv: "+b_recv);
-			data_sent=1;
+		data_sent=1;
 		var a=new Array();
 		a=b_recv.split(";");
 		if (a[1]=="login")
@@ -196,6 +229,7 @@ function brain_recv()
 				sw("menu_div");
 				document.getElementById("muname").innerHTML=cuser;
 				console.log("cookies: "+document.cookie);
+				send_visits();
 				}
 			else
 				{
@@ -203,6 +237,19 @@ function brain_recv()
 				alert("არასწორი სახელი ან პაროლი");
 
 				}
+			}
+		else if (a[1]=="visits")
+			{
+
+			if (a[2]!="done")
+				{
+				console.log("visits recieved");
+				visits="";
+				setc("work","")
+				sw("menu_div");
+				console.log("cookies: "+document.cookie);
+				}
+			
 			}
 //		document.getElementById("infodiv").innerHTML=b_recv+"<br>"+		document.getElementById("infodiv").innerHTML;
 
@@ -262,6 +309,7 @@ else
 	{
 	unid=cc("unid");
 	}
+
 function check_user()
 	{
 
@@ -274,10 +322,12 @@ function check_user()
 		cuser=cc("username");
 		sw("menu_div");
 		document.getElementById("muname").innerHTML=cuser;
+		send_visits();
 		}
 	}
 
 check_user();
+
 //document.getElementById("infodiv").innerHTML=document.cookie;
 </script>
 
