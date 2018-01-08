@@ -174,7 +174,7 @@ function ajax_send()
 
 function brain_recv()
 	{
-
+console.log("received something");
 	if (brainhttp.readyState==4 && brainhttp.status==200)
 		{
 		b_recv=brainhttp.responseText;
