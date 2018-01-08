@@ -90,6 +90,48 @@ function scan_bar_code()
 
 
 
+function setc(mname, mval)
+	{
+	document.cookie=mname+"="+mval+";";
+	}
+
+
+function cc(mname)
+	{
+	var mycookies = document.cookie;
+	var mc= new Array();
+	mc=mycookies.split(";");
+	var found=false;
+	for (i=0;i<mc.length ;i++ )
+		{
+		mk=mc[i].split("=");
+		mk[0]=mk[0].replace(" ","");
+		if (mk[0]==mname)
+			{
+			found=true;
+			return mk[1];
+			}
+		}
+	if (found==false)
+		{
+		return "";
+		}
+	}
+
+function sw(mscr)
+	{
+
+	document.getElementById("login_div").style.display="none";
+	document.getElementById("menu_div").style.display="none";
+
+	document.getElementById(mscr).style.display="inline";
+	}
+
+function logout()
+	{
+	setc("username","");
+	check_user();
+	}
 </script>
 
   </head>
@@ -109,7 +151,7 @@ function scan_bar_code()
 </div>
 
 <div id='menu_div' style="visibility:hidden;">
-
+<p align=right>მოგასლმებით: <span id='muname'></span>, <a href="Javascript: logout();">გამოსვლა</a></p>
 <center>
 	</p><a href="Javascript: scan_bar_code();">ლოკაციის სკანირება</a></p>
 	<br>
@@ -119,8 +161,25 @@ function scan_bar_code()
 </body>
 
 <script>
+var cuser="";
 
-document.getElementById("infodiv").innerHTML=document.cookie;
+function check_user()
+	{
+
+	if (cc("username")=="")
+		{
+		sw("login_div");
+		}
+	else
+		{	
+		cuser=cc("username");
+		sw("menu_div");
+		document.getElementById("muname").innerHTML=cuser;
+		}
+	}
+
+check_user();
+//document.getElementById("infodiv").innerHTML=document.cookie;
 </script>
 
 </html>
