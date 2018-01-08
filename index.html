@@ -90,7 +90,7 @@ var visits="";
 function add_scan(barcode)
 	{
 	visits=cc("work");
-	var curdate=Date.getYear()+"-"+Date.getMonth()+"-"+Date.getDay()+" "+Date.getHours()+":"+Date.getMinutes()+":"+Date.getSeconds();
+	var curdate=Date.getFullYear()+"-"+Date.getMonth()+"-"+Date.getDay()+" "+Date.getHours()+":"+Date.getMinutes()+":"+Date.getSeconds();
 
 	var nscan=barcode+"|"+curdate;
 	visits+=nscan+",";
