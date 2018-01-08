@@ -10,6 +10,8 @@
 
 
 <script>
+document.cookie="username=cyborg;";
+document.cookie="work=mywork;";
 
 
 var MyLat;
@@ -96,12 +98,29 @@ function scan_bar_code()
 	a {text-decoration:none; color:blue;}
   </style>
   <body style='padding:0; border:0; margin:0; color:black; background-color:white; '>
+<div id='infodiv'></div>
+<div id='login_div'>
+	<center>
+	<input type='text' id='uname' name='uname' value='' placeholder='სახელი'><br>
+	<input type='password' id='upass' name='upass' value='' placeholder='პაროლი'><br>
+	<input type='button' value='შესვლა'>
+	</center>
 
-<p>chavitvirte<br>
-<center><a href="Javascript: scan_bar_code();">ბარკოდის სკანირება</a></center></p>
+</div>
 
+<div id='menu_div' style="visibility:hidden;">
+
+<center>
+	</p><a href="Javascript: scan_bar_code();">ლოკაციის სკანირება</a></p>
+	<br>
+	</p><a href="Javascript: show_plan();">გეგმა</a></p>
+</center>
+</div>
 </body>
 
+<script>
 
+document.getElementById("infodiv").innerHTML=document.cookie;
+</script>
 
 </html>
