@@ -174,12 +174,12 @@ function ajax_send()
 
 function brain_recv()
 	{
-console.log("received something");
+
 	if (brainhttp.readyState==4 && brainhttp.status==200)
 		{
 		b_recv=brainhttp.responseText;
 	
-		console.log("recv: ".b_recv);
+		console.log("recv: "+b_recv);
 
 		var a=new Array();
 		a=b_recv.split(";");
