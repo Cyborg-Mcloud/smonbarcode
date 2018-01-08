@@ -159,6 +159,7 @@ function resend()
 	{
 	if (data_sent!=curdata)
 		{
+		console.log("repeat: "+curdata+ " - "+data_sent);
 		ajax_send();
 		setTimeout("resend();",5000);
 		}
@@ -188,6 +189,8 @@ function brain_recv()
 			data_sent=a[2];
 			if (a[3]!="")
 				{
+				console.log("logged in");
+				console.log(curdata+ " - "+data_sent);
 				setc("username",a[3])
 				cuser=a[3];
 				sw("menu_div");
