@@ -149,6 +149,7 @@ function send_data(mdata)
 	{
 	
 	curdata=mdata;
+	console.log("sending data: "+curdata);
 	data_sent="";
 	ajax_send();
 	setTimeout("resend();",5000);
