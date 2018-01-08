@@ -123,6 +123,7 @@ function sw(mscr)
 
 	document.getElementById("login_div").style.display="none";
 	document.getElementById("menu_div").style.display="none";
+	document.getElementById("wait_div").style.display="none";
 
 	document.getElementById(mscr).style.display="inline";
 	}
@@ -132,6 +133,87 @@ function logout()
 	setc("username","");
 	check_user();
 	}
+
+
+var brainhttp;
+var b_recv;
+if (window.XMLHttpRequest) {brainhttp=new XMLHttpRequest();}
+else if (window.ActiveXObject) {brainhttp=new ActiveXObject('Microsoft.XMLHTTP');}
+else {alert('Your browser does not support XMLHTTP!');}
+
+var curdata="";
+var data_sent="";
+brainhttp.onreadystatechange=brain_recv;
+
+function send_data(mdata)
+	{
+	
+	curdata=mdata;
+	data_sent="";
+	ajax_send();
+	setTimeout("resend();",5000);
+	
+	}
+
+function resend()
+	{
+	if (data_sent!=curdata)
+		{
+		ajax_send();
+		setTimeout("resend();",5000);
+		}
+	}
+function ajax_send()
+	{
+	url='https://smartgps.ge/barcode/ajax.php?'+curdata;
+	console.log("send data: "+url);
+	brainhttp.open('GET',url,true);
+	brainhttp.send(null);
+	}
+
+
+function brain_recv()
+	{
+
+	if (brainhttp.readyState==4 && brainhttp.status==200)
+		{
+		b_recv=brainhttp.responseText;
+	
+		console.log("recv: ".b_recv);
+
+		var a=new Array();
+		a=b_recv.split(";");
+		if (a[0]=="login")
+			{
+			data_sent=a[1];
+			if (a[2]!="")
+				{
+				setc("username",a[2])
+				cuser=a[2];
+				sw("menu_div");
+				document.getElementById("muname").innerHTML=cuser;
+				}
+			else
+				{
+				sw("login_div");
+				alert("არასწორი სახელი ან პაროლი");
+
+				}
+			}
+//		document.getElementById("infodiv").innerHTML=b_recv+"<br>"+		document.getElementById("infodiv").innerHTML;
+
+
+		}
+	}
+
+
+function login()
+	{
+	var mdata="unid="+unid+"&login=1&uname="+document.getElementById("uname").value+"&upass="+document.getElementById("upass").value;
+	sw("wait_div");
+	send_data(mdata);
+	}
+
 </script>
 
   </head>
@@ -150,6 +232,10 @@ function logout()
 
 </div>
 
+<div id='wait_div'>
+	 მიმდინარეობს მონაცემების გადაგზავნა
+</div>
+
 <div id='menu_div' style="visibility:hidden;">
 <p align=right>მოგასლმებით: <span id='muname'></span>, <a href="Javascript: logout();">გამოსვლა</a></p>
 <center>
@@ -162,7 +248,15 @@ function logout()
 
 <script>
 var cuser="";
-
+var unid="";
+if (cc("unid")=="")
+	{
+	setc("unid",parseInt(Math.random()*10000000));
+	}
+else
+	{
+	unid=cc("unid");
+	}
 function check_user()
 	{
 
