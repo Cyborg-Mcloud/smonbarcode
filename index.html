@@ -142,7 +142,7 @@ else if (window.ActiveXObject) {brainhttp=new ActiveXObject('Microsoft.XMLHTTP')
 else {alert('Your browser does not support XMLHTTP!');}
 
 var curdata="";
-var data_sent="";
+var data_sent=0;
 brainhttp.onreadystatechange=brain_recv;
 
 function send_data(mdata)
@@ -150,7 +150,7 @@ function send_data(mdata)
 	
 	curdata=mdata;
 	console.log("sending data: "+curdata);
-	data_sent="";
+	data_sent=0;
 	ajax_send();
 	setTimeout("resend();",5000);
 	
@@ -158,7 +158,7 @@ function send_data(mdata)
 
 function resend()
 	{
-	if (data_sent!=curdata)
+	if (data_sent==0)
 		{
 		console.log("repeat: "+curdata+ " - "+data_sent);
 		ajax_send();
@@ -182,12 +182,12 @@ function brain_recv()
 		b_recv=brainhttp.responseText;
 	
 		console.log("recv: "+b_recv);
-
+			data_sent=1;
 		var a=new Array();
 		a=b_recv.split(";");
 		if (a[1]=="login")
 			{
-			data_sent=a[2];
+
 			if (a[3]!="")
 				{
 				console.log("logged in");
