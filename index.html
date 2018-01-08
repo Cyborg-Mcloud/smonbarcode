@@ -10,8 +10,8 @@
 
 
 <script>
-document.cookie="username=cyborg;";
-document.cookie="work=mywork;";
+document.cookie="username=;";
+document.cookie="work=;";
 
 
 var MyLat;
@@ -30,7 +30,7 @@ function onDeviceReady()
 	var opts = { timeout: 5000, enableHighAccuracy: true, maximumAge:0};
 	watchID = navigator.geolocation.watchPosition(onSuccess, onError, opts);
 	
-	scan_bar_code();
+//	scan_bar_code();
 
     }
 
