@@ -183,13 +183,13 @@ function brain_recv()
 
 		var a=new Array();
 		a=b_recv.split(";");
-		if (a[0]=="login")
+		if (a[1]=="login")
 			{
-			data_sent=a[1];
+			data_sent=a[2];
 			if (a[2]!="")
 				{
-				setc("username",a[2])
-				cuser=a[2];
+				setc("username",a[3])
+				cuser=a[3];
 				sw("menu_div");
 				document.getElementById("muname").innerHTML=cuser;
 				}
