@@ -1,0 +1,110 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+@font-face {
+	font-family: "Medium";
+	src:url('../fonts/NotoSansGeorgian-Medium.ttf');}
+@font-face {
+	font-family: "SemiBold";
+	src:url('../fonts/NotoSansGeorgian-SemiBold.ttf');}
+@font-face {
+	font-family: "RobotoMedium";
+	src:url('../fonts/Roboto-Medium.ttf');}
+
+
+body,html {
+	background-color:#f1f2f2 !important;
+	font-family: Arial, Sans-serif !important;
+	height: 100%;
+}
+
+.headerbg {
+	background-color: #1565c0;
+	width: 100% !important;
+}
+
+.header {
+	color: #ffffff;
+	padding: 11px 20px;
+}
+
+.menuBtn {
+	font-size: 24px;
+}
+
+a.menu {
+	color: #ffffff !important;
+}
+
+a.menu:hover, a.menu:focus, a.menu:active {
+	text-decoration: none;
+}
+
+.headerTitle {
+	margin-left: 34px;
+	margin-top: 3px;
+	font-family: 'Medium' !important;
+	font-size: 20px;
+}
+
+.content {
+	background-color: #ffffff;
+	margin-top: 98px;
+	padding: 20px 60px !important;
+}
+
+.name {
+	font-family: 'Medium';
+	font-size: 14px;
+	font-weight: bold;
+	color: #212121;
+}
+
+.address {
+	font-family: 'Medium';
+	font-size: 12px;
+	color: #939598;
+}
+
+.greyText {
+	font-family: 'Medium';
+	font-size: 12px;
+	color: #939598;
+}
+
+.addressDark {
+	font-family: 'Medium';
+	font-size: 12px;
+	color: #212121;
+}
+
+.status {
+	font-family: 'Medium';
+	font-size: 12px;
+	color:#939598;
+}
+
+code.idNumber {
+	color: #212121 !important; 
+	font-size: 24px !important;
+	font-weight: bold;
+}
+
+.hr {
+	background-color: #e6e7e8;
+	height: 1px;
+	width: 100%;
+	margin: 20px 0;
+}
+
+.menuItem {
+	font-family: 'SemiBold';
+	font-family: 20px;
+	color: #888889;
+	text-align:center;
+}
+
+a.test:hover {
+	text-decoration: none;
+}
