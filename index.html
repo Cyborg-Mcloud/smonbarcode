@@ -348,10 +348,11 @@ function show_plan()
 
 		 <p>Current Location Mode: <span id="curlocmode"></span></p>
 
-        <div><button id="location-settings" onclick='open_loc_settings'>Open Location settings</button></div>
+        <div><button id="location-settings" onclick='open_loc_settings' value='Open Location settings'></div>
 
-        <div><button id="request-authorization" onclick="req_loc_auth">Request Location Authorization</button></div>
-		 <button id="request-accuracy"  onclick="req_loc_acc">Request Location Accuracy</button>
+        <div><button id="request-authorization" onclick="req_loc_auth" value='Request Location Authorization'></div>
+<div>		 <button id="request-accuracy"  onclick="req_loc_acc" value='Request Location Accuracy' ></div>
+		 <Br><br>
 
 
 
@@ -415,11 +416,13 @@ function req_loc_acc()
 	{
 	var accuracy = 3;
 	var accuracyName  = "High Accuracy";
+	console.log("requesting acc");
 	cordova.plugins.locationAccuracy.request(onRequestSuccess, onRequestFailure, cordova.plugins.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY);
 	}
 
 function req_loc_auth()
 	{
+	console.log("requesting auth");
 	cordova.plugins.diagnostic.isLocationAuthorized(function (authorized) {
             if(!authorized)
 				{
