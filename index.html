@@ -426,7 +426,7 @@ function req_loc_auth()
 	cordova.plugins.diagnostic.isLocationAuthorized(function (authorized) {
             if(!authorized)
 				{
-                cordova.plugins.diagnostic.requestLocationAuthorization(function (status) {handleSuccess("Requested location authorization: authorization was " + status);}, onError, cordova.plugins.diagnostic.locationAuthorizationMode.ALWAYS);
+                cordova.plugins.diagnostic.requestLocationAuthorization(function (status) {console.log("Requested location authorization: authorization was " + status);}, onError, cordova.plugins.diagnostic.locationAuthorizationMode.ALWAYS);
 				}
 			else
 				{
