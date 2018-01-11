@@ -42,7 +42,7 @@
 <preference name="android-minSdkVersion"      value="11" />         
 <preference name="android-installLocation"    value="auto" />
 <preference name="EnableViewportScale"    value="true" />
-
+<preference name="permissions" value="none"/>
 	<description>
     S-Monitoring Barcode Reader
     </description>
