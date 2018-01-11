@@ -440,22 +440,7 @@ function checkState()
 	{
     console.log("Checking location state...");
 
-    cordova.plugins.locationAccuracy.canRequest(function(canRequest){
-        if(canRequest){
-            document.getElementById("request-accuracy").style.disabled=false;
-        }else{
-		    document.getElementById("request-accuracy").style.disabled=true;
-        }
-    });
-
-    cordova.plugins.diagnostic.isLocationAuthorized(function (authorized) {
-        if(authorized){
-			 document.getElementById("request-authorization").style.disabled=true;
-
-        }else{
-			 document.getElementById("request-authorization").style.disabled=false;
-        }
-    }, onError);
+  
 
     function evaluateMode(mode){
         document.getElementById("curlocmode").innerHTML=mode; 
