@@ -5,7 +5,8 @@
         id        = "com.designge.smonbarcode"
 	    versionCode="1" 
         version   = "0.0.5"
-		package="com.designge.smonbarcode">
+		package="com.designge.smonbarcode"
+		xmlns:android="http://schemas.android.com/apk/res/android">
     <name>SMonBarcode</name>
 
 
