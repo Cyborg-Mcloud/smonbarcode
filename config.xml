@@ -83,7 +83,7 @@
 
 	<gap:plugin name="cordova-plugin-inappbrowser"  source="npm" />
 <plugin name="cordova-plugin-globalization" source="npm" spec="1.0.3" />
-<plugin name="cordova-background-geolocation-lt" spec="2.8.5">
+<plugin name="cordova-background-geolocation-lt" source="npm" spec="2.8.5" />
 
 
  <platform name="android">
