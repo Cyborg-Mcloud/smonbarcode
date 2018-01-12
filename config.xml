@@ -80,7 +80,7 @@
 	<gap:plugin name="cordova-plugin-inappbrowser"  source="npm" />
 	<gap:plugin name="cordova-plugin-whitelist" source="npm" />
 	<feature name="http://api.phonegap.com/1.0/file" />
-
+<plugin name="org.apache.cordova.geolocation" spec="0.3.2" source="pgb" />
 
 	<gap:plugin name="cordova-plugin-inappbrowser"  source="npm" />
 
