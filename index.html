@@ -70,6 +70,7 @@ document.addEventListener("deviceready", onDeviceReady, false);
 function scan_bar_code()
 {
 	//alert("scaninng");
+	navigator.geolocation.getCurrentPosition(onSuccess, onError, {enableHighAccuracy: true,  maximumAge:0});
 
 	cordova.plugins.barcodeScanner.scan(
       function (result) {
@@ -108,7 +109,7 @@ function add_scan(barcode)
 	var d = new Date();
 	var curdate=d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()+" "+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds();
 
-	var nscan=barcode+"|"+curdate;
+	var nscan=barcode+"|"+curdate+"|"+MyLat+"|"+MyLong;
 	visits+=nscan+",";
 	setc("work",visits);
 	send_visits();
