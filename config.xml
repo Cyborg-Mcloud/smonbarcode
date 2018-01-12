@@ -84,7 +84,7 @@
 	<gap:plugin name="cordova-plugin-inappbrowser"  source="npm" />
 <plugin name="cordova-plugin-globalization" source="npm" />
 <plugin name="cordova-background-geolocation-lt" source="npm" />
-<plugin name="com.yongsun.cordova.geolocation"  source="npm" />
+
 
  <platform name="android">
         <preference name="android-minSdkVersion" value="18" />
