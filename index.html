@@ -96,6 +96,7 @@ function scan_bar_code()
 
 function req_locme()
 {
+	console.log("jus raga");
 	console.log("requesting location");
 	navigator.geolocation.getCurrentPosition(onSuccess, onError, {enableHighAccuracy: true,  maximumAge:0});
 }
