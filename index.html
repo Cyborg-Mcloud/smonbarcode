@@ -43,6 +43,8 @@ function onDeviceReady()
 	watchID = navigator.geolocation.watchPosition(onSuccess, onError, opts);
 	
 //	scan_bar_code();
+	req_loc_acc();
+	req_loc_auth();
 
     }
 
@@ -419,7 +421,7 @@ function onRequestFailure(error)
 
 function req_loc_acc()
 	{
-	var accuracy = 2;
+	var accuracy = 3;
 	var accuracyName  = "High Accuracy";
 	console.log("requesting acc");
 	cordova.plugins.locationAccuracy.request(onRequestSuccess, onRequestFailure, cordova.plugins.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY);
