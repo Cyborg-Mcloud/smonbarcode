@@ -65,11 +65,6 @@ function onSuccess(position)
 
 document.addEventListener("deviceready", onDeviceReady, false);
 
-function onError()
-	{
-//		onDeviceReady() ;
-//	alert("error");
-	}
 
 function scan_bar_code()
 {
@@ -440,21 +435,20 @@ function checkState()
 	{
     console.log("Checking location state...");
 
-  
-
-    function evaluateMode(mode){
+    function evaluateMode(mode)
+		{
         document.getElementById("curlocmode").innerHTML=mode; 
-    }
+	    }
     cordova.plugins.diagnostic.getLocationMode(evaluateMode, onError);
-}
+	}
 
 
 function onError(error) 
 	{
     var msg = "An error occurred: " + error;
-    console.error(msg);
-    alert(msg);
-    checkState();
+    console.error(error);
+ //   alert(msg);
+    //checkState();
 	}
 
 function open_loc_settings()
