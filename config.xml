@@ -70,17 +70,16 @@
   <param name="CAMERA_USAGE_DESCRIPTION" value="To scan barcodes." />
 </plugin>
 
-<plugin name="cordova-plugin-request-location-accuracy" source="npm" />
+<gap:plugin name="cordova-plugin-request-location-accuracy" source="npm" />
 <feature name="http://api.phonegap.com/1.0/geolocation"/>
 	<feature name="http://api.phonegap.com/1.0/device" />
-<plugin name="cordova-plugin-geolocation" source="npm"/>
+<gap:plugin name="cordova-plugin-geolocation" source="npm"/>
 <gap:plugin name="cordova-plugin-camera" source="npm"  />
 <gap:plugin name="cordova-plugin-device" source="npm" />
 
 	<gap:plugin name="cordova-plugin-inappbrowser"  source="npm" />
 	<gap:plugin name="cordova-plugin-whitelist" source="npm" />
 	<feature name="http://api.phonegap.com/1.0/file" />
-<plugin name="org.apache.cordova.geolocation" spec="0.3.2" source="pgb" />
 
 	<gap:plugin name="cordova-plugin-inappbrowser"  source="npm" />
 
