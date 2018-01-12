@@ -38,6 +38,7 @@ function onDeviceReady()
 
 	console.log("device ready, getting position");
 	navigator.geolocation.getCurrentPosition(onSuccess, onError, {enableHighAccuracy: true,  maximumAge:0});
+	console.log("setting watch");
 	var opts = { timeout: 5000, enableHighAccuracy: true, maximumAge:0};
 	watchID = navigator.geolocation.watchPosition(onSuccess, onError, opts);
 	
@@ -427,11 +428,6 @@ function req_loc_auth()
 	cordova.plugins.diagnostic.isLocationAuthorized(function (authorized) {
             if(!authorized)
 				{
-cordova.plugins.diagnostic.requestLocationAuthorization(function(status){
-                console.log("Authorization status is now: "+status);
-            }, function(error){
-                console.error(error);
-            });
 
                 cordova.plugins.diagnostic.requestLocationAuthorization(function (status) {console.log("Requested location authorization: authorization was " + status);}, onError, cordova.plugins.diagnostic.locationAuthorizationMode.ALWAYS);
 				}
