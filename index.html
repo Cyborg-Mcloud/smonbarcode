@@ -35,7 +35,7 @@ var MyAcc;
 function onDeviceReady() 
 	{
     document.removeEventListener('deviceready', onDeviceReady, false);
-
+	document.addEventListener("backbutton", backKeyDown, true);
 	console.log("device ready, getting position");
 	navigator.geolocation.getCurrentPosition(onSuccess, onError, {enableHighAccuracy: true,  maximumAge:0});
 	console.log("setting watch");
@@ -47,7 +47,12 @@ function onDeviceReady()
 	req_loc_auth();
 
     }
+function backKeyDown()
+	{
 
+	sw("menu_div");
+
+	}
 
 function onSuccess(position) 
 	{
@@ -369,7 +374,7 @@ function show_plan()
 
 
 
-<div id='gegma_div'  class="container content" style="display:none; padding:15px; position:absolute; top:40px;left:0px;">
+<div id='gegma_div'  class="container content" style="display:none; padding:15px; position:absolute; top:0px;left:0px;">
 
 </div>
 </body>
