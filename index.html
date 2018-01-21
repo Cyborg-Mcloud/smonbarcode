@@ -282,6 +282,10 @@ function brain_recv()
 			document.getElementById("gegma_div").innerHTML=a[2];
 			sw("gegma_div");
 			}
+		else if (a[1]=="logout")
+			{
+			logout()
+			}
 //		document.getElementById("infodiv").innerHTML=b_recv+"<br>"+		document.getElementById("infodiv").innerHTML;
 
 
@@ -313,9 +317,9 @@ function show_plan()
 
 	<div class="container-fluid headerbg fixed-top">
 		<div class="row header">
-			<div class="menuBtn">
+			<!--<div class="menuBtn">
 				<a class="menu" href="#"><i class="icon-menu5"></i></a>
-			</div>
+			</div>-->
 			<div class="headerTitle">
 				სმარტ ჯიპიესი
 			</div>
@@ -324,7 +328,8 @@ function show_plan()
 
 
 <div id='infodiv'></div>
-<div id='login_div' style='position:absolute; top:60px;left:0px;'>
+<div id='login_div' style='position:absolute; top:60px;left:0px; width:100%;'>
+<Br><br><br><br><br>
 	<center>
 	<input type='text' id='uname' name='uname' value='' placeholder='მომხ. სახელი'><br>
 	<input type='password' id='upass' name='upass' value='' placeholder='პაროლი'><br>
@@ -334,7 +339,8 @@ function show_plan()
 </div>
 
 <div id='wait_div' style="display:none; position:absolute; top:55px;left:0px;">
-	 მიმდინარეობს მონაცემების გადაგზავნა
+<br><br><br><br><br><br><br><br>
+<center>მოქმედება წარმატებით შესრულდა<br>მიმდინარეობს მონაცემების გადაგზავნა</center>
 </div>
 
 
