@@ -3,8 +3,8 @@
 <widget xmlns     = "http://www.w3.org/ns/widgets"
 		xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "com.designge.smonbarcode"
-	    versionCode="1" 
-        version   = "0.0.5"
+	    versionCode="2" 
+        version   = "1.0.0"
 		package="com.designge.smonbarcode"
 		xmlns:android="http://schemas.android.com/apk/res/android">
     <name>SMonBarcode</name>
@@ -22,7 +22,7 @@
 
 <preference name="android-build-tool" value="gradle" /> 
 
-<preference name="phonegap-version" value="cli-7.0.1" /> 
+<preference name="phonegap-version" value="cli-7.1.0" /> 
 <preference name="orientation" value="portrait" />
 <preference name="target-device"              value="handset" />
 <!--	<preference name="fullscreen" value="true" />-->
@@ -34,7 +34,7 @@
 <preference name="show-splash-screen-spinner" value="false" />    
 <preference name="auto-hide-splash-screen"    value="false" />
 <preference name="disable-cursor"             value="false" />
-<preference name="android-minSdkVersion"      value="11" />         
+<preference name="android-minSdkVersion"      value="18" />         
 <preference name="android-installLocation"    value="auto" />
 <preference name="EnableViewportScale"    value="true" />
 
