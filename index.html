@@ -78,6 +78,23 @@ function onSuccess(position)
 
 document.addEventListener("deviceready", onDeviceReady, false);
 
+function checkin()
+	{
+	navigator.geolocation.getCurrentPosition(onSuccess, onError, {enableHighAccuracy: true,  maximumAge:0});
+
+	if (GPSFound==1)
+		{
+		// mimdinare lokaciaze gegmis kompanies motxovna
+		var mdata="unid="+unid+"&reqcmp=1&uname="+cuser+"&lat="+MyLat+"&lng="+MyLong;
+		sw("wait_div");
+		send_data(mdata);
+
+		}
+	else
+		{
+		document.getElementById("infodiv").innerHTML="<font color=red><center>დაელოდოთ ლოკაციის დადგენას</center></font>";
+		}
+	}
 
 function scan_bar_code()
 	{
@@ -295,6 +312,11 @@ function brain_recv()
 			document.getElementById("gegma_div").innerHTML=a[2];
 			sw("gegma_div");
 			}
+		else if (a[1]=="checkin")
+			{
+			document.getElementById("checkin_div").innerHTML=a[2];
+			sw("checkin_div");
+			}
 		else if (a[1]=="logout")
 			{
 			logout()
@@ -368,7 +390,18 @@ function show_plan()
 				</div>
 			</div>
 		</a></div>
-				<div id='infodiv'></div>
+		
+		<div class="h-50"><a class="test" href="Javascript: checkin();">
+			<div class="d-flex align-items-center h-100 justify-content-center">
+				<div class="menuItem">
+					<img src="assets/img/camera.svg" width="64"><br/>
+					Check in
+				</div>
+			</div>
+		</a></div>
+		
+
+		<div id='infodiv'></div>
 		<div class="h-50"><a class="test" href="Javascript: show_plan();">
 			<div class="d-flex align-items-center h-100 justify-content-center">
 				<div class="menuItem">
@@ -398,6 +431,13 @@ function show_plan()
 <div id='gegma_div'  class="container content" style="display:none; padding:15px; position:absolute; top:0px;left:0px;">
 
 </div>
+
+
+
+<div id='checkin_div'  class="container content" style="display:none; padding:15px; position:absolute; top:0px;left:0px;">
+
+</div>
+
 </body>
 
 <script>
