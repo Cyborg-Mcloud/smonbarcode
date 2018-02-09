@@ -318,6 +318,15 @@ function brain_recv()
 				}
 			
 			}
+		else if (a[1]=="checkin_done")
+			{
+
+			if (a[2]=="done")
+				{
+				console.log("checkin recieved");
+				sw("menu_div");
+				}
+			}
 		else if (a[1]=="gegma")
 			{
 			document.getElementById("gegma_div").innerHTML=a[2];
