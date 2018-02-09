@@ -96,6 +96,16 @@ function checkin()
 		}
 	}
 
+function check_me_in(cmpid)
+	{
+	var d = new Date();
+	var curdate=d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()+"%20"+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds();
+	var nscan=cmpid+"|"+curdate+"|"+MyLat+"|"+MyLong;
+	var mdata="unid="+unid+"&uname="+cuser+"&checkin="+nscan;
+	sw("wait_div");
+	send_data(mdata);
+	}
+
 function scan_bar_code()
 	{
 	//alert("scaninng");
@@ -200,6 +210,7 @@ function sw(mscr)
 	document.getElementById("menu_div").style.display="none";
 	document.getElementById("wait_div").style.display="none";
 	document.getElementById("gegma_div").style.display="none";
+	document.getElementById("checkin_div").style.display="none";
 
 	document.getElementById(mscr).style.display="inline";
 	}
