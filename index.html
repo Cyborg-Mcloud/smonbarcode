@@ -103,7 +103,9 @@ function check_me_in(cmpid)
 	var nscan=cmpid+"|"+curdate+"|"+MyLat+"|"+MyLong;
 	var mdata="unid="+unid+"&uname="+cuser+"&checkin="+nscan;
 	sw("wait_div");
-	send_data(mdata);
+	curdata=mdata;
+	ajax_send();
+//	send_data(mdata);
 	}
 
 function scan_bar_code()
