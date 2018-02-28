@@ -49,6 +49,8 @@ function onDeviceReady()
 	req_loc_acc();
 	req_loc_auth();
 
+	initMap();
+
     }
 function backKeyDown()
 	{
@@ -404,9 +406,10 @@ function show_plan()
 
 <div class="container-fluid h-100" style="height: 100%; padding-top: 58px; display:none;"   id='menu_div' >
 	<div class="d-flex flex-column h-100 justify-content-between align-items-stretch" style="height: 100%;" >
-<Br><br><br>
-		<div id='infodiv'></div>
+<Br><br>
 		 <div id="mymap" style='height:150px;'></div>
+		<div id='infodiv'></div>
+
 
    
 		<table width=100%>
@@ -467,7 +470,7 @@ function show_plan()
 
 
  <script>
-		var markers=new Array();
+
 	function initMap() 
 		{
 		if (MyLat<30)
@@ -490,8 +493,10 @@ function show_plan()
 
 	
       }
+
+//&callback=initMap
     </script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFY47FE__z9AvRLBoYG0T2XeOTiHdwzOQ&callback=initMap"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFY47FE__z9AvRLBoYG0T2XeOTiHdwzOQ"></script>
 
 
 </body>
