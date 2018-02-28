@@ -61,6 +61,7 @@ function backKeyDown()
 	}
 
 var GPSFound=0;
+var inited=0;
 
 function onSuccess(position) 
 	{
@@ -75,8 +76,17 @@ function onSuccess(position)
 	MyAcc=position.coords.accuracy;
 
 	console.log(MyLat+ " - "+MyLong);
+	if (inited==0)
+		{
+		initMap();
+		}
+	else
+		{
+		var myLatLng = {lat: MyLat, lng: MyLong};
+		MyMap.panTo(myLatLng);
+		MyMarker.setPosition(myLatLng);
 
-	initMap();
+		}
 
     }
 
@@ -471,6 +481,9 @@ function show_plan()
 
 
  <script>
+
+ var MyMap;
+ var MyMarker;
 
 	function initMap() 
 		{
