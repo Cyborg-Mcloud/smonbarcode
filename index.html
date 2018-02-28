@@ -404,32 +404,38 @@ function show_plan()
 <div class="container-fluid h-100" style="height: 100%; padding-top: 58px; display:none;"   id='menu_div' >
 	<div class="d-flex flex-column h-100 justify-content-between align-items-stretch" style="height: 100%;" >
 <Br><br><br>
-		<div class="h-50"><a class="test" href="Javascript: scan_bar_code();">
+		<div id='infodiv'></div>
+		 <div id="mymap" style='height:150px;'></div>
+
+   
+		<table>
+		<tr>
+		<Td><a class="test" href="Javascript: scan_bar_code();">
 			<div class="d-flex align-items-center h-50 justify-content-center">
 				<div class="menuItem">
 					<img src="assets/img/camera.svg" width="64"><br/>
 					სკანირება
 				</div>
 			</div>
-		</a></div>
-		<div id='infodiv'></div>
-		<div class="h-50"><a class="test" href="Javascript: checkin();">
+		</a></td>
+		<Td><a class="test" href="Javascript: checkin();">
 			<div class="d-flex align-items-center h-50 justify-content-center">
 				<div class="menuItem">
 					<img src="assets/img/camera.svg" width="64"><br/>
 					Check in
 				</div>
 			</div>
-		</a></div>
-		
-		<div class="h-50"><a class="test" href="Javascript: show_plan();">
+		</a></td>
+		<Td>
+		<a class="test" href="Javascript: show_plan();">
 			<div class="d-flex align-items-center h-50 justify-content-center">
 				<div class="menuItem">
 					<img src="assets/img/route.svg" width="64"><br/>
 					რუტი
 				</div>
 			</div>
-		</a></div>
+		</a></td>
+		</tr></table>
 <!--
 <a href='Javascript: req_locme();'>reqlocme</a><BR>
 		 <p>Current Location Mode: <span id="curlocmode"></span></p>
@@ -457,6 +463,35 @@ function show_plan()
 <div id='checkin_div'  class="container content" style="display:none; padding:15px; position:absolute; top:0px;left:0px;">
 
 </div>
+
+
+ <script>
+		var markers=new Array();
+	function initMap() 
+		{
+		if (MyLat<30)
+			{
+			MyLat=41.718287;
+			MyLong=44.778728;
+			}
+		var myLatLng = {lat: MyLat, lng: MyLong};
+
+		MyMap = new google.maps.Map(document.getElementById('mymap'), {
+          zoom: 17,
+          center: myLatLng,
+			  zIndex:70
+        });
+
+		MyMarker = new google.maps.Marker({
+			  position: myLatLng,
+			  map: MyMap,
+			});
+
+	
+      }
+    </script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFY47FE__z9AvRLBoYG0T2XeOTiHdwzOQ&callback=initMap"></script>
+
 
 </body>
 
