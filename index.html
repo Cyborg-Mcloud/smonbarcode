@@ -32,7 +32,8 @@ var MyAlt;
 var MyHead;
 var MySpeed;
 var MyAcc;
-
+MyLat=41.718287;
+MyLong=44.778728;
 
 
 function onDeviceReady() 
@@ -49,7 +50,7 @@ function onDeviceReady()
 	req_loc_acc();
 	req_loc_auth();
 
-	initMap();
+
 
     }
 function backKeyDown()
@@ -75,7 +76,7 @@ function onSuccess(position)
 
 	console.log(MyLat+ " - "+MyLong);
 
-
+	initMap();
 
     }
 
