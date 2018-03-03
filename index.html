@@ -408,9 +408,13 @@ function show_plan()
 
 function del_cmp(cmpid)
 	{
-	var mdata="unid="+unid+"&gegma=1&uname="+cuser+"&delcmp="+cmpid;
-	sw("wait_div");
-	send_data(mdata);
+	if (confirm("დარწმუნებული ხართ რომ გინდათ მონიშნული კომპანიის წაშლა?"))
+		{
+		console.log("delcmp: "+cmpid);
+		var mdata="unid="+unid+"&gegma=1&uname="+cuser+"&delcmp="+cmpid;
+		sw("wait_div");
+		send_data(mdata);
+		}
 	}
 </script>
 
