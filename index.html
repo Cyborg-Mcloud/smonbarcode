@@ -370,7 +370,8 @@ function brain_recv()
 			}
 		else if (a[1]=="gegma")
 			{
-			document.getElementById("gegma_div").innerHTML=a[2];
+			var c=b_recv.replace(";gegma;","");
+			document.getElementById("gegma_div").innerHTML=c;
 			console.log("showing gegma");
 			sw("gegma_div");
 			}
