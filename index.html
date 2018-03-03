@@ -250,6 +250,26 @@ var data_sent=0;
 var attempts=0;
 brainhttp.onreadystatechange=brain_recv;
 
+var row_time=0;
+var sel_row=0;
+function mrowdown(rowid)
+	{
+	row_time=Math.floor(Date.now() / 1000);
+	sel_row=rowid;
+
+	}
+function mrow_up()
+	{
+	if (sel_row>0 && (Math.floor(Date.now() / 1000)-row_time)>5)
+		{
+		if (confirm("დარწმუნებული ხართ რომ გინდათ მონიშნული კომპანიის წაშლა?"))
+			{
+			del_cmp(sel_row);
+			}
+		}
+	row_time=0;
+	sel_row=0;
+	}
 function send_data(mdata)
 	{
 	attempts=0;
@@ -376,6 +396,14 @@ function login()
 function show_plan()
 	{
 	var mdata="unid="+unid+"&gegma=1&uname="+cuser;
+	sw("wait_div");
+	send_data(mdata);
+	}
+
+
+function del_cmp(cmpid)
+	{
+	var mdata="unid="+unid+"&gegma=1&uname="+cuser+"&delcmp="+cmpid;
 	sw("wait_div");
 	send_data(mdata);
 	}
