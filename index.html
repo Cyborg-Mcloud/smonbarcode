@@ -256,14 +256,18 @@ function mrowdown(rowid)
 	{
 	row_time=Math.floor(Date.now() / 1000);
 	sel_row=rowid;
+	console.log("pressed: "+row_time+", selrow: "+sel_row);
 
 	}
 function mrow_up()
 	{
-	if (sel_row>0 && (Math.floor(Date.now() / 1000)-row_time)>5)
+	console.log("upped: "+row_time+", selrow: "+sel_row+", curtime: "+Math.floor(Date.now() / 1000) );
+
+	if (sel_row>0 && (Math.floor(Date.now() / 1000)-row_time)>2)
 		{
 		if (confirm("დარწმუნებული ხართ რომ გინდათ მონიშნული კომპანიის წაშლა?"))
 			{
+				console.log("delete");
 			del_cmp(sel_row);
 			}
 		}
