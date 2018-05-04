@@ -55,6 +55,9 @@
 	  <param name="android-package" value="com.designge.smonbarcode"/>
 	</feature>
 	
+<feature name="File">
+        <param name="android-package" value="org.apache.cordova.file.FileUtils" />
+    </feature>
 
 <platform name="android">
 	<allow-intent href="market:*" />
