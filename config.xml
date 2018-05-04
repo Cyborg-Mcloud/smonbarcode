@@ -48,5 +48,25 @@
         Cyborg-Mcloud
     </author>
 
+ <plugin name="cordova.plugins.diagnostic" version="*" />
+
+
+	<feature name="App">
+	  <param name="android-package" value="com.designge.smonbarcode"/>
+	</feature>
+	
+  <feature name="File">
+        <param name="android-package" value="org.apache.cordova.file.FileUtils" />
+    </feature>
+
+<feature name="Camera">
+    <param name="android-package" value="org.apache.cordova.camera.CameraLauncher" />
+    <param name="ios-package" value="CDVCamera" />
+</feature>
+
+
+<plugin name="phonegap-plugin-barcodescanner" spec="6.0.8">
+  <param name="CAMERA_USAGE_DESCRIPTION" value="To scan barcodes." />
+</plugin>
 
 </widget>
