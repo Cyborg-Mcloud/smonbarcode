@@ -51,20 +51,21 @@ function onDeviceReady()
 	req_loc_acc();
 	req_loc_auth();
 
-	if (inited==0)
-		{
+	//if (inited==0)
+//		{
 		inited=1;
 		initMap();
-		}
+		//}
 
 
 
     }
 function backKeyDown()
 	{
-
-	sw("menu_div");
-
+	if (cuser!="" && cuser!=0)
+		{
+		sw("menu_div");
+		}
 	}
 
 var GPSFound=0;
@@ -539,11 +540,15 @@ function del_cmp(cmpid)
 			MyLong=44.778728;
 			}
 		var myLatLng = {lat: MyLat, lng: MyLong};
-
+ 
 		MyMap = new google.maps.Map(document.getElementById('mymap'), {
-          zoom: 17,
+          zoom: 15,
           center: myLatLng,
-			  zIndex:70
+			  zIndex:70,
+			fullscreenControl: false,
+			streetViewControl: false,
+			mapTypeControl: false,
+			disableDefaultUI: true
         });
 
 		MyMarker = new google.maps.Marker({
