@@ -62,7 +62,7 @@ function onDeviceReady()
     }
 function backKeyDown()
 	{
-	if (cuser!="" && cuser!=0)
+	if (cc("username")!="")
 		{
 		console.log("back: "+cuser);
 		sw("menu_div");
@@ -517,7 +517,7 @@ function del_cmp(cmpid)
 
 
 
-<div id='gegma_div'  class="container content" style="display:none; padding:15px; position:absolute; top:0px;left:0px; border:1px solid red;">
+<div id='gegma_div'  class="container content" style="display:none; padding:15px; position:absolute; top:0px;left:0px; ">
 
 </div>
 
