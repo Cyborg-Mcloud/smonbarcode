@@ -290,7 +290,7 @@ function send_data(mdata)
 	console.log("sending data: "+curdata);
 	data_sent=0;
 	ajax_send();
-	setTimeout("resend();",2000);
+	setTimeout("resend();",5000);
 	
 	}
 
@@ -298,12 +298,12 @@ function resend()
 	{
 	if (data_sent==0)
 		{
-		if (attempts<7)
+		if (attempts<10)
 			{
 			attempts++;
 			console.log("repeat: "+curdata+ " - "+data_sent);
 			ajax_send();
-			setTimeout("resend();",2000);
+			setTimeout("resend();",5000);
 			}
 		else
 			{
