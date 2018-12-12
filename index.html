@@ -188,9 +188,17 @@ function add_scan(barcode)
 //	setc("work",visits);
 //	send_visits();
 
-	var mdata="unid="+unid+"&reqcmp=1&uname="+cuser+"&lat="+MyLat+"&lng="+MyLong+"&ctype=2&barcode="+barcode;
+	//var mdata="unid="+unid+"&reqcmp=1&uname="+cuser+"&lat="+MyLat+"&lng="+MyLong+"&ctype=2&barcode="+barcode;
+	//sw("wait_div");
+	//send_data(mdata);
+
+	var d = new Date();
+	var curdate=d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()+"%20"+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds();
+	var nscan=barcode+"|"+curdate+"|"+MyLat+"|"+MyLong;
+	var mdata="unid="+unid+"&uname="+cuser+"&checkin="+nscan;
 	sw("wait_div");
-	send_data(mdata);
+	curdata=mdata;
+	ajax_send();
 
 
 	}
