@@ -195,7 +195,7 @@ function add_scan(barcode)
 	var d = new Date();
 	var curdate=d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()+"%20"+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds();
 	var nscan=barcode+"|"+curdate+"|"+MyLat+"|"+MyLong;
-	var mdata="unid="+unid+"&uname="+cuser+"&checkin="+nscan;
+	var mdata="unid="+unid+"&uname="+cuser+"&iambarcode=2&checkin="+nscan;
 	sw("wait_div");
 	curdata=mdata;
 	ajax_send();
