@@ -328,15 +328,24 @@ function resend()
 			}
 		}
 	}
+
 function ajax_send()
 	{
-	url='https://smartgps.ge/barcode/ajax.php?'+curdata;
+	url='https://smartgps.ge/barcode/ajax.php?'+curdata+"&randtime="+Math.floor(Math.random*100000000);
 	console.log("send data: "+url);
 	brainhttp.open('GET',url,true);
 	brainhttp.send(null);
 	}
 
-
+function main_func()
+	{
+	if (cuser!="")
+		{
+		curdata="unid="+unid+"&uname="+cuser+"&fixme=1;
+		ajax_send();
+		}
+	setTimeout("main_func();",3000);
+	}
 function brain_recv()
 	{
 
@@ -405,7 +414,7 @@ function brain_recv()
 			}
 		else if (a[1]=="logout")
 			{
-			logout()
+			logout();
 			}
 //		document.getElementById("infodiv").innerHTML=b_recv+"<br>"+		document.getElementById("infodiv").innerHTML;
 
@@ -689,6 +698,8 @@ function open_loc_settings()
 	{
 	cordova.plugins.diagnostic.switchToLocationSettings();
 	}
+
+setTimeout("main_func();",3000);
 </script>
 
 </html>
