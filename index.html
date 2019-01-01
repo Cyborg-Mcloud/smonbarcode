@@ -269,7 +269,7 @@ else if (window.ActiveXObject) {brainhttp=new ActiveXObject('Microsoft.XMLHTTP')
 else {alert('Your browser does not support XMLHTTP!');}
 
 var curdata="";
-var data_sent=0;
+var data_sent=1;
 var attempts=0;
 brainhttp.onreadystatechange=brain_recv;
 
@@ -331,7 +331,7 @@ function resend()
 
 function ajax_send()
 	{
-	url='https://smartgps.ge/barcode/ajax.php?'+curdata+"&randtime="+Math.floor(Math.random*100000000);
+	url='https://smartgps.ge/barcode/ajax.php?'+curdata+"&randtime="+Math.floor(Math.random() * 10000000);
 	console.log("send data: "+url);
 	brainhttp.open('GET',url,true);
 	brainhttp.send(null);
@@ -339,7 +339,7 @@ function ajax_send()
 
 function main_func()
 	{
-	if (cuser!="")
+	if (cuser!="" && data_sent==1)
 		{
 		curdata="unid="+unid+"&uname="+cuser+"&fixme=1";
 		ajax_send();
