@@ -110,7 +110,7 @@ function checkin()
 		sw("wait_div");
 		send_data(mdata);
 
-		document.getElementById("inside_checkin_div").style.display="inline";
+
 
 		}
 	else
@@ -132,6 +132,7 @@ function check_me_in(cmpid)
 		curdata=mdata;
 		ajax_send();
 	//	send_data(mdata);
+			document.getElementById("inside_checkin_div").style.display="inline";
 		}
 	}
 
