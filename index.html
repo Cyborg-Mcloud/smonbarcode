@@ -110,6 +110,8 @@ function checkin()
 		sw("wait_div");
 		send_data(mdata);
 
+		document.getElementById("inside_checkin_div").style.display="inline";
+
 		}
 	else
 		{
@@ -544,6 +546,30 @@ function del_cmp(cmpid)
 
 </div>
 
+
+<div id='inside_checkin_div'  class="container content" style="display:none; padding:15px; position:absolute; top:0px;left:0px; width:100%; height:100%; z-index:100;">
+<table width=100%>
+		<tr>
+		<Td><a class="test" href="Javascript: scan_object();">
+			<div class="d-flex align-items-center h-50 justify-content-center">
+				<div class="menuItem">
+					<img src="assets/img/camera.svg" width="64"><br/>
+					ობიექტის სკანირება
+				</div>
+			</div>
+		</a></td>
+		<Td><a class="test" href="Javascript: checkout();">
+			<div class="d-flex align-items-center h-50 justify-content-center">
+				<div class="menuItem">
+					<img src="assets/img/camera.svg" width="64"><br/>
+					Check OUT
+				</div>
+			</div>
+		</a></td>
+		<Td>
+		</tr>
+	</table>
+</div>
 
 
 <div id='checkin_div'  class="container content" style="display:none; padding:15px; position:absolute; top:0px;left:0px;">
