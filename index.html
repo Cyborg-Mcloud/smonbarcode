@@ -40,7 +40,6 @@ MyLong=44.778728;
 
 function onDeviceReady() 
 	{
-	console.log("dev red");
     document.removeEventListener('deviceready', onDeviceReady, false);
 	document.addEventListener("backbutton", backKeyDown, true);
 	console.log("device ready, getting position");
@@ -404,7 +403,7 @@ function brain_recv()
 				console.log("checkin recieved");
 				sw("menu_div");
 				}
-			if (a[3]=="has_checkout")
+			if (a[3]=="checkout")
 				{
 				document.getElementById("inside_checkin_div").style.display="inline";
 				}
@@ -648,7 +647,6 @@ function check_user()
 		cuser=cc("username");
 		sw("menu_div");
 		document.getElementById("muname").innerHTML=cuser;
-
 		send_visits();
 		}
 	}
@@ -695,7 +693,7 @@ function req_loc_auth()
 				}
 			else
 				{
-                errorFunction("loc not authorized, reinstall");
+                errorFunction(1);
 	            }
 		}, errorFunction);
 	}
@@ -720,7 +718,7 @@ function onError(error)
 
 function errorFunction(error)
 	{
-	console.error("error: "+error);
+	console.error(error);
 	if (error!=1)
 		{
 		req_loc_acc();
@@ -732,7 +730,7 @@ function open_loc_settings()
 	{
 	cordova.plugins.diagnostic.switchToLocationSettings();
 	}
-console.log("program start");
+
 setTimeout("main_func();",3000);
 </script>
 
