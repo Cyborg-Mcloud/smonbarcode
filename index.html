@@ -693,7 +693,7 @@ function req_loc_auth()
 				}
 			else
 				{
-                errorFunction(1);
+                errorFunction("loc not authorized, reinstall");
 	            }
 		}, errorFunction);
 	}
@@ -718,7 +718,7 @@ function onError(error)
 
 function errorFunction(error)
 	{
-	console.error(error);
+	console.error("error: "+error);
 	if (error!=1)
 		{
 		req_loc_acc();
