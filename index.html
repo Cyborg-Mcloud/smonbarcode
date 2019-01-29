@@ -99,6 +99,25 @@ if (inited==1)
 
 document.addEventListener("deviceready", onDeviceReady, false);
 
+
+function checkout()
+	{
+	if (confirm("ჩექ-აუთი?"))
+		{
+	
+		var d = new Date();
+		var curdate=d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()+"%20"+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds();
+		var nscan=curdate+"|"+MyLat+"|"+MyLong;
+		var mdata="unid="+unid+"&uname="+cuser+"&checkout="+nscan;
+		sw("wait_div");
+		curdata=mdata;
+		ajax_send();
+	//	send_data(mdata);
+		
+		}
+	
+	}
+
 function checkin()
 	{
 	navigator.geolocation.getCurrentPosition(onSuccess, onError, {enableHighAccuracy: true,  maximumAge:0});
