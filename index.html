@@ -40,6 +40,7 @@ MyLong=44.778728;
 
 function onDeviceReady() 
 	{
+	console.log("dev red");
     document.removeEventListener('deviceready', onDeviceReady, false);
 	document.addEventListener("backbutton", backKeyDown, true);
 	console.log("device ready, getting position");
@@ -730,7 +731,7 @@ function open_loc_settings()
 	{
 	cordova.plugins.diagnostic.switchToLocationSettings();
 	}
-
+console.log("program start");
 setTimeout("main_func();",3000);
 </script>
 
