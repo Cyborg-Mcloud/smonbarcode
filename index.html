@@ -132,7 +132,7 @@ function check_me_in(cmpid)
 		curdata=mdata;
 		ajax_send();
 	//	send_data(mdata);
-			document.getElementById("inside_checkin_div").style.display="inline";
+		
 		}
 	}
 
@@ -349,6 +349,7 @@ function main_func()
 		}
 	setTimeout("main_func();",10000);
 	}
+
 function brain_recv()
 	{
 
@@ -401,6 +402,10 @@ function brain_recv()
 				{
 				console.log("checkin recieved");
 				sw("menu_div");
+				}
+			if (a[3]=="has_checkout")
+				{
+				document.getElementById("inside_checkin_div").style.display="inline";
 				}
 			}
 		else if (a[1]=="gegma")
