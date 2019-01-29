@@ -640,22 +640,30 @@ function del_cmp(cmpid)
 			MyLong=44.778728;
 			}
 		var myLatLng = {lat: MyLat, lng: MyLong};
- 
-		MyMap = new google.maps.Map(document.getElementById('mymap'), {
-          zoom: 15,
-          center: myLatLng,
+		if (typeof google!="undefined")
+			{
+			MyMap = new google.maps.Map(document.getElementById('mymap'), {
+			  zoom: 15,
+			  center: myLatLng,
 			  zIndex:70,
 			fullscreenControl: false,
 			streetViewControl: false,
 			mapTypeControl: false,
 			disableDefaultUI: true
-        });
+		 });
 
-		MyMarker = new google.maps.Marker({
+			MyMarker = new google.maps.Marker({
 			  position: myLatLng,
 			  map: MyMap,
 			});
 
+			}
+		else
+		{
+
+		location.reload(); 
+			}
+		
 	
       }
 
