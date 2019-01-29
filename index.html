@@ -458,7 +458,12 @@ function brain_recv()
 			}
 		else if (a[1]=="fix")
 			{
-			if (cur_sw=="wait_div")
+			if (a[3]=="checkout")
+				{
+				console.log("showing checkout dva");
+				sw("inside_checkin_div");
+				}
+			else if (cur_sw=="wait_div")
 				{
 				sw("menu_div");
 				}
