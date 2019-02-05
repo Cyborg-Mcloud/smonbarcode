@@ -155,6 +155,53 @@ function check_me_in(cmpid)
 		}
 	}
 
+function send_object(barcode)
+	{
+	var d = new Date();
+	var curdate=d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()+"%20"+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds();
+	var nscan=barcode+"|"+curdate+"|"+MyLat+"|"+MyLong;
+	var mdata="unid="+unid+"&uname="+cuser+"&object_scan=1&object="+nscan;
+	sw("wait_div");
+	curdata=mdata;
+	ajax_send();
+
+
+	}
+
+function scan_object()
+	{
+	navigator.geolocation.getCurrentPosition(onSuccess, onError, {enableHighAccuracy: true,  maximumAge:0});
+
+	if (GPSFound==1)
+		{
+		
+		cordova.plugins.barcodeScanner.scan(
+			  function (result) {
+				  send_object(result.text);
+				 // alert("cavikitxe: " + result.text + "\n" +   "formati: " + result.format + "\n");
+			  },
+			  function (error) {
+				  alert("Scanning failed: " + error);
+			  },
+			  {
+				  preferFrontCamera : false, // iOS and Android
+				  showFlipCameraButton : false, // iOS and Android
+				  showTorchButton : true, // iOS and Android
+				  torchOn: false, // Android, launch with the torch switched on (if available)
+				  saveHistory: false, // Android, save scan history (default false)
+				  prompt : "მიუშვირეთ ბარკოდს", // Android
+				  resultDisplayDuration: 300, // Android, display scanned text for X ms. 0 suppresses it entirely, default 1500
+				  disableAnimations : true, // iOS
+				  disableSuccessBeep: false // iOS and Android
+			  }
+		   );
+		}
+	else
+		{
+		document.getElementById("infodiv").innerHTML="<font color=red><center>დაელოდოთ ლოკაციის დადგენას</center></font>";
+		}
+	}
+
 function scan_bar_code()
 	{
 	//alert("scaninng");
