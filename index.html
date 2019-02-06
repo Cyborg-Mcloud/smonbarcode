@@ -482,6 +482,24 @@ function brain_recv()
 				}
 			
 			}
+		else if (a[1]=="object_done")
+			{
+
+			if (a[2]=="done")
+				{
+				console.log("object recieved");
+				if (a[3]=="checkout")
+					{
+					console.log("showing checkout");
+					sw("inside_checkin_div");
+					}
+				else	
+					{	
+					sw("menu_div");
+					}
+				}
+			
+			}
 		else if (a[1]=="checked_out")
 			{
 			//document.getElementById("inside_checkin_div").style.display="none";
