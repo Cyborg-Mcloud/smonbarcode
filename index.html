@@ -524,7 +524,7 @@ function brain_recv()
 					{
 					kb=k[i].split("+");
 
-					document.getElementById("checkin_div").innerHTML+='<div class="row"><a href="Javascript: check_me_in(\''+kb[0]+'\')"><div class="col-md-12"><div class="name">'+kb[1]+'</div></div><div class="col-md-12"><div class="address">'+kb[2]+'</div></div><div class="col-md-12"><div class="status"><img src="assets/img/statusred.png">დაჩექინება</div></div></a><div class="hr"></div></div>';
+					document.getElementById("checkin_div").innerHTML+='<div class="row"><a href="Javascript: check_me_in('+kb[0]+')"><div class="col-md-12"><div class="name">'+kb[1]+'</div></div><div class="col-md-12"><div class="address">'+kb[2]+'</div></div><div class="col-md-12"><div class="status"><img src="assets/img/statusred.png">დაჩექინება</div></div></a><div class="hr"></div></div>';
 					}
 				}
 			sw("checkin_div");
