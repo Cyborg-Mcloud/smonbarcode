@@ -125,7 +125,7 @@ function checkin()
 	if (GPSFound==1)
 		{
 		// mimdinare lokaciaze gegmis kompanies motxovna
-		var mdata="unid="+unid+"&reqcmp=1&uname="+cuser+"&lat="+MyLat+"&lng="+MyLong+"&ctype=1";
+		var mdata="unid="+unid+"&reqcmp=1&uname="+cuser+"&lat="+MyLat+"&lng="+MyLong+"&ctype=1&new=1";
 		sw("wait_div");
 		send_data(mdata);
 
@@ -514,7 +514,19 @@ function brain_recv()
 			}
 		else if (a[1]=="checkin")
 			{
-			document.getElementById("checkin_div").innerHTML=a[2];
+			// old method
+			//document.getElementById("checkin_div").innerHTML=a[2];
+			k=a[2].split("|");
+			document.getElementById("checkin_div").innerHTML="";
+			for (i=0;i<k.length ;i++ )
+				{
+				if (k[i]!="")
+					{
+					kb=k[i].split("+");
+
+					document.getElementById("checkin_div").innerHTML+='<div class="row"><a href="Javascript: check_me_in(\''+kb[0]+'\')"><div class="col-md-12"><div class="name">'+kb[1]+'</div></div><div class="col-md-12"><div class="address">'+kb[2]+'</div></div><div class="col-md-12"><div class="status"><img src="assets/img/statusred.png">დაჩექინება</div></div></a><div class="hr"></div></div>';
+					}
+				}
 			sw("checkin_div");
 			}
 		else if (a[1]=="logout")
