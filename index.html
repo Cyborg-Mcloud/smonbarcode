@@ -26,8 +26,6 @@
 <script src="assets/js/bootstrap.bundle.min.js"></script>
 
 <script>
-
-
 var MyLat;
 var MyLong;
 var MyAlt;
@@ -110,9 +108,9 @@ function checkout()
 		var nscan=curdate+"|"+MyLat+"|"+MyLong;
 		var mdata="unid="+unid+"&uname="+cuser+"&checkout="+nscan;
 		sw("wait_div");
-		curdata=mdata;
-		ajax_send();
-	//	send_data(mdata);
+	//	curdata=mdata;
+	//	ajax_send();
+		send_data(mdata);
 		
 		}
 	
@@ -148,9 +146,9 @@ function check_me_in(cmpid)
 		var nscan=cmpid+"|"+curdate+"|"+MyLat+"|"+MyLong;
 		var mdata="unid="+unid+"&uname="+cuser+"&checkin="+nscan;
 		sw("wait_div");
-		curdata=mdata;
-		ajax_send();
-	//	send_data(mdata);
+//		curdata=mdata;
+//		ajax_send();
+		send_data(mdata);
 		
 		}
 	}
@@ -162,9 +160,9 @@ function send_object(barcode)
 	var nscan=barcode+"|"+curdate+"|"+MyLat+"|"+MyLong;
 	var mdata="unid="+unid+"&uname="+cuser+"&object_scan=1&object="+nscan;
 	sw("wait_div");
-	curdata=mdata;
-	ajax_send();
-
+//	curdata=mdata;
+//	ajax_send();
+	send_data(mdata);
 
 	}
 
@@ -266,9 +264,9 @@ function add_scan(barcode)
 	var nscan=barcode+"|"+curdate+"|"+MyLat+"|"+MyLong;
 	var mdata="unid="+unid+"&uname="+cuser+"&iambarcode=2&checkin="+nscan;
 	sw("wait_div");
-	curdata=mdata;
-	ajax_send();
-
+//	curdata=mdata;
+//	ajax_send();
+	send_data(mdata);
 
 	}
 
@@ -368,15 +366,19 @@ function mrow_up()
 	row_time=0;
 	sel_row=0;
 	}
+
+var req_counter=0;
+
 function send_data(mdata)
 	{
 	attempts=0;
-	curdata=mdata;
+	req_counter++;
+	curdata=mdata+"&req_counter="+req_counter;
 	console.log("sending data: "+curdata);
 	data_sent=0;
 	ajax_send();
 	setTimeout("resend();",5000);
-	
+
 	}
 
 function resend()
@@ -423,127 +425,132 @@ function brain_recv()
 
 	if (brainhttp.readyState==4 && brainhttp.status==200)
 		{
-		b_recv=brainhttp.responseText;
-	
-		console.log("recv: "+b_recv);
 		data_sent=1;
+		b_recv=brainhttp.responseText;
+		console.log("recv: "+b_recv);
 		var a=new Array();
 		a=b_recv.split(";");
-		if (a[1]=="login")
+		if (a[0]==req_counter)
 			{
-
-			if (a[3]!="")
+			if (a[1]=="login")
 				{
-				console.log("logged in");
-				console.log(curdata+ " - "+data_sent);
-				setc("username",a[3])
-				cuser=a[3];
-				sw("menu_div");
-				document.getElementById("muname").innerHTML=cuser;
-				console.log("cookies: "+document.cookie);
-				send_visits();
-				}
-			else
-				{
-				sw("login_div");
-				alert("არასწორი სახელი ან პაროლი");
-
-				}
-			}
-		else if (a[1]=="visits")
-			{
-
-			if (a[2]=="done")
-				{
-				console.log("visits recieved");
-				visits="";
-				setc("work","")
-				sw("menu_div");
-				console.log("cookies: "+document.cookie);
-				}
-			
-			}
-		else if (a[1]=="checkin_done")
-			{
-
-			if (a[2]=="done")
-				{
-				console.log("checkin recieved");
-				if (a[3]=="checkout")
+				if (a[3]!="")
 					{
-					console.log("showing checkout");
-					sw("inside_checkin_div");
+					console.log("logged in");
+					console.log(curdata+ " - "+data_sent);
+					setc("username",a[3])
+					cuser=a[3];
+					sw("menu_div");
+					document.getElementById("muname").innerHTML=cuser;
+					console.log("cookies: "+document.cookie);
+					send_visits();
+					}
+				else
+					{
+					sw("login_div");
+					alert("არასწორი სახელი ან პაროლი");
 
 					}
-				else	
-					{	
+				}
+			else if (a[1]=="visits")
+				{
+
+				if (a[2]=="done")
+					{
+					console.log("visits recieved");
+					visits="";
+					setc("work","")
+					sw("menu_div");
+					console.log("cookies: "+document.cookie);
+					}
+				
+				}
+			else if (a[1]=="checkin_done")
+				{
+
+				if (a[2]=="done")
+					{
+					console.log("checkin recieved");
+					if (a[3]=="checkout")
+						{
+						console.log("showing checkout");
+						sw("inside_checkin_div");
+
+						}
+					else	
+						{	
+						sw("menu_div");
+						}
+					}
+				
+				}
+			else if (a[1]=="object_done")
+				{
+
+				if (a[2]=="done")
+					{
+					console.log("object recieved");
+					if (a[3]=="checkout")
+						{
+						console.log("showing checkout");
+						sw("inside_checkin_div");
+						}
+					else	
+						{	
+						sw("menu_div");
+						}
+					}
+				
+				}
+			else if (a[1]=="checked_out")
+				{
+				//document.getElementById("inside_checkin_div").style.display="none";
+				sw("menu_div");
+				}
+			else if (a[1]=="gegma")
+				{
+				var c=b_recv.replace(";gegma;","");
+				document.getElementById("gegma_div").innerHTML=c;
+				console.log("showing gegma");
+				sw("gegma_div");
+				}
+			else if (a[1]=="checkin")
+				{
+				// old method
+				//document.getElementById("checkin_div").innerHTML=a[2];
+				k=a[2].split("|");
+				document.getElementById("checkin_div").innerHTML="";
+				for (i=0;i<k.length ;i++ )
+					{
+					if (k[i]!="")
+						{
+						kb=k[i].split("+");
+
+						document.getElementById("checkin_div").innerHTML+='<div class="row"><a href="Javascript: check_me_in('+kb[0]+')"><div class="col-md-12"><div class="name">'+kb[1]+'</div></div><div class="col-md-12"><div class="address">'+kb[2]+'</div></div><div class="col-md-12"><div class="status"><img src="assets/img/statusred.png"><font color=blue>დაჩექინება</font></div></div></a><div class="hr"></div></div>';
+						}
+					}
+				sw("checkin_div");
+				}
+			else if (a[1]=="logout")
+				{
+				logout();
+				}
+			else if (a[1]=="fix")
+				{
+				if (a[3]=="checkout")
+					{
+					console.log("showing checkout dva");
+					sw("inside_checkin_div");
+					}
+				else if (cur_sw=="wait_div")
+					{
 					sw("menu_div");
 					}
 				}
-			
 			}
-		else if (a[1]=="object_done")
+		else
 			{
-
-			if (a[2]=="done")
-				{
-				console.log("object recieved");
-				if (a[3]=="checkout")
-					{
-					console.log("showing checkout");
-					sw("inside_checkin_div");
-					}
-				else	
-					{	
-					sw("menu_div");
-					}
-				}
-			
-			}
-		else if (a[1]=="checked_out")
-			{
-			//document.getElementById("inside_checkin_div").style.display="none";
-			sw("menu_div");
-			}
-		else if (a[1]=="gegma")
-			{
-			var c=b_recv.replace(";gegma;","");
-			document.getElementById("gegma_div").innerHTML=c;
-			console.log("showing gegma");
-			sw("gegma_div");
-			}
-		else if (a[1]=="checkin")
-			{
-			// old method
-			//document.getElementById("checkin_div").innerHTML=a[2];
-			k=a[2].split("|");
-			document.getElementById("checkin_div").innerHTML="";
-			for (i=0;i<k.length ;i++ )
-				{
-				if (k[i]!="")
-					{
-					kb=k[i].split("+");
-
-					document.getElementById("checkin_div").innerHTML+='<div class="row"><a href="Javascript: check_me_in('+kb[0]+')"><div class="col-md-12"><div class="name">'+kb[1]+'</div></div><div class="col-md-12"><div class="address">'+kb[2]+'</div></div><div class="col-md-12"><div class="status"><img src="assets/img/statusred.png"><font color=blue>დაჩექინება</font></div></div></a><div class="hr"></div></div>';
-					}
-				}
-			sw("checkin_div");
-			}
-		else if (a[1]=="logout")
-			{
-			logout();
-			}
-		else if (a[1]=="fix")
-			{
-			if (a[3]=="checkout")
-				{
-				console.log("showing checkout dva");
-				sw("inside_checkin_div");
-				}
-			else if (cur_sw=="wait_div")
-				{
-				sw("menu_div");
-				}
+			console.log("wrong message number: "+req_counter+" / "+a[0]);
 			}
 //		document.getElementById("infodiv").innerHTML=b_recv+"<br>"+		document.getElementById("infodiv").innerHTML;
 
