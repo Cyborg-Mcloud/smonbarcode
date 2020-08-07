@@ -3,8 +3,6 @@
   <head>
   <meta http-equiv="Content-Security-Policy"
       content="default-src 'self' gap://ready file://* *; img-src * 'self' data:; style-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googleapis.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googleapis.com;">
-  <!--  <meta http-equiv="Content-Security-Policy"
-      content="img-src * 'self' data:; default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://maps.googleapis.com https://fonts.googleapis.com">-->
   	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport"   content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>SMonBarcode</title>
@@ -35,9 +33,7 @@ var MyAcc;
 MyLat=41.718287;
 MyLong=44.778728;
 
-
-function onDeviceReady() 
-	{
+function onDeviceReady() {
     document.removeEventListener('deviceready', onDeviceReady, false);
 	document.addEventListener("backbutton", backKeyDown, true);
 	console.log("device ready, getting position");
@@ -55,24 +51,19 @@ function onDeviceReady()
 		inited=1;
 		initMap();
 		//}
+}
 
-
-
-    }
-function backKeyDown()
-	{
-	if (cc("username")!="")
-		{
+function backKeyDown() {
+	if (cc("username")!="") {
 		console.log("back: "+cuser);
 		sw("menu_div");
-		}
 	}
+}
 
 var GPSFound=0;
 var inited=0;
 
-function onSuccess(position) 
-	{
+function onSuccess(position) {
 	console.log("on GPS success");
 	document.getElementById("infodiv").innerHTML="<font color=green><center>თქვენი ლოკაცია დადგენილია</center></font>";
 	GPSFound=1;
@@ -83,78 +74,53 @@ function onSuccess(position)
 	MySpeed=position.coords.speed ;
 	MyAcc=position.coords.accuracy;
 
-	console.log(MyLat+ " - "+MyLong);
+	//console.log(MyLat+ " - "+MyLong);
 	
-if (inited==1)
-		{
+	if (inited==1) {
 		var myLatLng = {lat: MyLat, lng: MyLong};
 		MyMap.panTo(myLatLng);
 		MyMarker.setPosition(myLatLng);
-
-		}
-
-    }
+	}
+}
 
 document.addEventListener("deviceready", onDeviceReady, false);
 
-
-function checkout()
-	{
-	if (confirm("ჩექ-აუთი?"))
-		{
-	
+function checkout() {
+	if (confirm("ჩექ-აუთი?")) {
 		var d = new Date();
 		var curdate=d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()+"%20"+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds();
 		var nscan=curdate+"|"+MyLat+"|"+MyLong;
 		var mdata="unid="+unid+"&uname="+cuser+"&checkout="+nscan;
 		sw("wait_div");
-	//	curdata=mdata;
-	//	ajax_send();
-		send_data(mdata);
-		
-		}
-	
-	}
+		send_data(mdata);	
+	}	
+}
 
-function checkin()
-	{
+function checkin() {
 	navigator.geolocation.getCurrentPosition(onSuccess, onError, {enableHighAccuracy: true,  maximumAge:0});
 
-	if (GPSFound==1)
-		{
+	if (GPSFound==1) {
 		// mimdinare lokaciaze gegmis kompanies motxovna
 		var mdata="unid="+unid+"&reqcmp=1&uname="+cuser+"&lat="+MyLat+"&lng="+MyLong+"&ctype=1&new=1";
 		sw("wait_div");
 		send_data(mdata);
-
-
-
-		}
-	else
-		{
+	} else {
 		document.getElementById("infodiv").innerHTML="<font color=red><center>დაელოდოთ ლოკაციის დადგენას</center></font>";
-		}
 	}
+}
 
-function check_me_in(cmpid)
-	{
-	if (confirm("დაჩექინება?"))
-		{
-	
+function check_me_in(cmpid)	{
+	if (confirm("დაჩექინება?"))	{
 		var d = new Date();
 		var curdate=d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()+"%20"+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds();
 		var nscan=cmpid+"|"+curdate+"|"+MyLat+"|"+MyLong;
 		var mdata="unid="+unid+"&uname="+cuser+"&checkin="+nscan;
 		sw("wait_div");
-//		curdata=mdata;
-//		ajax_send();
 		send_data(mdata);
-		
-		}
 	}
+}
 
-function send_object(barcode)
-	{
+function send_object(barcode) {
 	var d = new Date();
 	var curdate=d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()+"%20"+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds();
 	var nscan=barcode+"|"+curdate+"|"+MyLat+"|"+MyLong;
@@ -163,20 +129,14 @@ function send_object(barcode)
 //	curdata=mdata;
 //	ajax_send();
 	send_data(mdata);
+}
 
-	}
-
-function scan_object()
-	{
+function scan_object() {
 	navigator.geolocation.getCurrentPosition(onSuccess, onError, {enableHighAccuracy: true,  maximumAge:0});
-
-	if (GPSFound==1)
-		{
-		
+	if (GPSFound==1) {
 		cordova.plugins.barcodeScanner.scan(
 			  function (result) {
 				  send_object(result.text);
-				 // alert("cavikitxe: " + result.text + "\n" +   "formati: " + result.format + "\n");
 			  },
 			  function (error) {
 				  alert("Scanning failed: " + error);
@@ -193,21 +153,15 @@ function scan_object()
 				  disableSuccessBeep: false // iOS and Android
 			  }
 		   );
-		}
-	else
-		{
+	} else {
 		document.getElementById("infodiv").innerHTML="<font color=red><center>დაელოდოთ ლოკაციის დადგენას</center></font>";
-		}
 	}
+}
 
-function scan_bar_code()
-	{
+function scan_bar_code() {
 	//alert("scaninng");
 	navigator.geolocation.getCurrentPosition(onSuccess, onError, {enableHighAccuracy: true,  maximumAge:0});
-
-	if (GPSFound==1)
-		{
-		
+	if (GPSFound==1) {
 			cordova.plugins.barcodeScanner.scan(
 			  function (result) {
 				  add_scan(result.text);
@@ -228,15 +182,12 @@ function scan_bar_code()
 				  disableSuccessBeep: false // iOS and Android
 			  }
 		   );
-		}
-	else
-		{
+	} else {
 		document.getElementById("infodiv").innerHTML="<font color=red><center>დაელოდოთ ლოკაციის დადგენას</center></font>";
-		}
 	}
+}
 
-function req_locme()
-{
+function req_locme() {
 	console.log("jus raga");
 	console.log("requesting location");
 	navigator.geolocation.getCurrentPosition(onSuccess, onError, {enableHighAccuracy: true,  maximumAge:0});
@@ -245,73 +196,49 @@ function req_locme()
 //  formats : "QR_CODE,PDF_417", // default: all but PDF_417 and RSS_EXPANDED
 //          orientation : "landscape", // Android only (portrait|landscape), default unset so it rotates with the device
 var visits="";
-function add_scan(barcode)
-	{
-	//visits=cc("work");
-//	var d = new Date();
-//	var curdate=d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()+"%20"+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds();
-//	var nscan=barcode+"|"+curdate+"|"+MyLat+"|"+MyLong;
-//	visits+=nscan+",";
-//	setc("work",visits);
-//	send_visits();
-
-	//var mdata="unid="+unid+"&reqcmp=1&uname="+cuser+"&lat="+MyLat+"&lng="+MyLong+"&ctype=2&barcode="+barcode;
-	//sw("wait_div");
-	//send_data(mdata);
-
+function add_scan(barcode) {
 	var d = new Date();
 	var curdate=d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()+"%20"+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds();
 	var nscan=barcode+"|"+curdate+"|"+MyLat+"|"+MyLong;
 	var mdata="unid="+unid+"&uname="+cuser+"&iambarcode=2&checkin="+nscan;
 	sw("wait_div");
-//	curdata=mdata;
-//	ajax_send();
 	send_data(mdata);
+}
 
-	}
-
-function send_visits()
-	{
+function send_visits() {
 	visits=cc("work");
-	if (visits!="")
-		{
+	if (visits!="")	{
 		var mdata="unid="+unid+"&visit=1&uname="+cuser+"&visits="+visits;
 		sw("wait_div");
 		send_data(mdata);
-		}
 	}
+}
 
-function setc(mname, mval)
-	{
+function setc(mname, mval) {
 	console.log("set cookie:"+mname+"="+mval+";");
 	document.cookie=""+mname+"="+mval+";";
-	}
+}
 
-
-function cc(mname)
-	{
+function cc(mname) {
 	var mycookies = document.cookie;
 	var mc= new Array();
 	mc=mycookies.split(";");
 	var found=false;
-	for (i=0;i<mc.length ;i++ )
-		{
+	for (i=0;i<mc.length ;i++ ) {
 		mk=mc[i].split("=");
 		mk[0]=mk[0].replace(" ","");
-		if (mk[0]==mname)
-			{
+		if (mk[0]==mname) {
 			found=true;
 			return mk[1];
-			}
-		}
-	if (found==false)
-		{
-		return "";
 		}
 	}
+	if (found==false) {
+		return "";
+	}
+}
+
 var cur_sw="";
-function sw(mscr)
-	{
+function sw(mscr) {
 	cur_sw=mscr;
 	document.getElementById("login_div").style.display="none";
 	document.getElementById("menu_div").style.display="none";
@@ -319,16 +246,13 @@ function sw(mscr)
 	document.getElementById("gegma_div").style.display="none";
 	document.getElementById("checkin_div").style.display="none";
 	document.getElementById("inside_checkin_div").style.display="none";
-
-
 	document.getElementById(mscr).style.display="inline";
-	}
+}
 
-function logout()
-	{
+function logout() {
 	setc("username","");
 	check_user();
-	}
+}
 
 
 var brainhttp;
@@ -344,33 +268,27 @@ brainhttp.onreadystatechange=brain_recv;
 
 var row_time=0;
 var sel_row=0;
-function mrowdown(rowid)
-	{
+function mrowdown(rowid) {
 	row_time=Math.floor(Date.now() / 1000);
 	sel_row=rowid;
 	console.log("pressed: "+row_time+", selrow: "+sel_row);
+}
 
-	}
-function mrow_up()
-	{
+function mrow_up() {
 	console.log("upped: "+row_time+", selrow: "+sel_row+", curtime: "+Math.floor(Date.now() / 1000) );
-
-	if (sel_row>0 && (Math.floor(Date.now() / 1000)-row_time)>2)
-		{
-		if (confirm("დარწმუნებული ხართ რომ გინდათ მონიშნული კომპანიის წაშლა?"))
-			{
-				console.log("delete");
+	if (sel_row>0 && (Math.floor(Date.now() / 1000)-row_time)>2) {
+		if (confirm("დარწმუნებული ხართ რომ გინდათ მონიშნული კომპანიის წაშლა?")) {
+			console.log("delete");
 			del_cmp(sel_row);
-			}
 		}
+	}
 	row_time=0;
 	sel_row=0;
-	}
+}
 
 var req_counter=0;
 
-function send_data(mdata)
-	{
+function send_data(mdata) {
 	attempts=0;
 	req_counter++;
 	curdata=mdata+"&req_counter="+req_counter;
@@ -378,64 +296,48 @@ function send_data(mdata)
 	data_sent=0;
 	ajax_send();
 	setTimeout("resend();",5000);
+}
 
-	}
-
-function resend()
-	{
-	if (data_sent==0)
-		{
-		if (attempts<10)
-			{
+function resend() {
+	if (data_sent==0) {
+		if (attempts<10) {
 			attempts++;
 			console.log("repeat: "+curdata+ " - "+data_sent);
 			ajax_send();
 			setTimeout("resend();",5000);
-			}
-		else
-			{
+		} else {
 			curdata="";
 			data_sent=1;
-			check_user();
-		
-			}
+			check_user();	
 		}
 	}
+}
 
-function ajax_send()
-	{
+function ajax_send() {
 	url='https://smartgps.ge/barcode/ajax.php?'+curdata+"&randtime="+Math.floor(Math.random() * 10000000);
 	console.log("send data: "+url);
 	brainhttp.open('GET',url,true);
 	brainhttp.send(null);
-	}
+}
 
-function main_func()
-	{
-	if (cuser!="" && data_sent==1)
-		{
+function main_func() {
+	if (cuser!="" && data_sent==1) {
 		mdata="unid="+unid+"&uname="+cuser+"&fixme=1";
 		send_data(mdata);
-		}
-	setTimeout("main_func();",10000);
 	}
+	setTimeout("main_func();",10000);
+}
 
-function brain_recv()
-	{
-
-	if (brainhttp.readyState==4 && brainhttp.status==200)
-		{
+function brain_recv() {
+	if (brainhttp.readyState==4 && brainhttp.status==200) {
 		data_sent=1;
 		b_recv=brainhttp.responseText;
 		console.log("recv: "+b_recv);
 		var a=new Array();
 		a=b_recv.split(";");
-		if (a[0]==req_counter)
-			{
-			if (a[1]=="login")
-				{
-				if (a[3]!="")
-					{
+		if (a[0]==req_counter) {
+			if (a[1]=="login") {
+				if (a[3]!="") {
 					console.log("logged in");
 					console.log(curdata+ " - "+data_sent);
 					setc("username",a[3])
@@ -444,146 +346,92 @@ function brain_recv()
 					document.getElementById("muname").innerHTML=cuser;
 					console.log("cookies: "+document.cookie);
 					send_visits();
-					}
-				else
-					{
+				} else {
 					sw("login_div");
 					alert("არასწორი სახელი ან პაროლი");
-
-					}
 				}
-			else if (a[1]=="visits")
-				{
-
-				if (a[2]=="done")
-					{
+			} else if (a[1]=="visits") {
+				if (a[2]=="done") {
 					console.log("visits recieved");
 					visits="";
 					setc("work","")
 					sw("menu_div");
 					console.log("cookies: "+document.cookie);
-					}
-				
-				}
-			else if (a[1]=="checkin_done")
-				{
-
-				if (a[2]=="done")
-					{
+				}	
+			} else if (a[1]=="checkin_done") {
+				if (a[2]=="done") {
 					console.log("checkin recieved");
-					if (a[3]=="checkout")
-						{
+					if (a[3]=="checkout") {
 						console.log("showing checkout");
 						sw("inside_checkin_div");
-
-						}
-					else	
-						{	
+					} else {	
 						sw("menu_div");
-						}
 					}
-				
-				}
-			else if (a[1]=="object_done")
-				{
-
-				if (a[2]=="done")
-					{
+				}	
+			} else if (a[1]=="object_done") {
+				if (a[2]=="done") {
 					console.log("object recieved");
-					if (a[3]=="checkout")
-						{
+					if (a[3]=="checkout") {
 						console.log("showing checkout");
 						sw("inside_checkin_div");
-						}
-					else	
-						{	
+					} else {	
 						sw("menu_div");
-						}
 					}
-				
-				}
-			else if (a[1]=="checked_out")
-				{
-				//document.getElementById("inside_checkin_div").style.display="none";
+				}	
+			} else if (a[1]=="checked_out") {
 				sw("menu_div");
-				}
-			else if (a[1]=="gegma")
-				{
+			} else if (a[1]=="gegma") {
 				var c=b_recv.replace(";gegma;","");
 				document.getElementById("gegma_div").innerHTML=c;
 				console.log("showing gegma");
 				sw("gegma_div");
-				}
-			else if (a[1]=="checkin")
-				{
+			} else if (a[1]=="checkin") {
 				// old method
-				//document.getElementById("checkin_div").innerHTML=a[2];
 				k=a[2].split("|");
 				document.getElementById("checkin_div").innerHTML="";
-				for (i=0;i<k.length ;i++ )
-					{
-					if (k[i]!="")
-						{
+				for (i=0;i<k.length ;i++ ) {
+					if (k[i]!="") {
 						kb=k[i].split("+");
-
 						document.getElementById("checkin_div").innerHTML+='<div class="row"><a href="Javascript: check_me_in(\''+kb[0]+'\')"><div class="col-md-12"><div class="name">'+kb[1]+'</div></div><div class="col-md-12"><div class="address">'+kb[2]+'</div></div><div class="col-md-12"><div class="status"><img src="assets/img/statusred.png"><font color=blue>დაჩექინება</font></div></div></a><div class="hr"></div></div>';
-						}
 					}
+				}
 				sw("checkin_div");
-				}
-			else if (a[1]=="logout")
-				{
+			} else if (a[1]=="logout") {
 				logout();
-				}
-			else if (a[1]=="fix")
-				{
-				if (a[3]=="checkout")
-					{
+			} else if (a[1]=="fix") {
+				if (a[3]=="checkout") {
 					console.log("showing checkout dva");
 					sw("inside_checkin_div");
-					}
-				else if (cur_sw=="wait_div")
-					{
+				} else if (cur_sw=="wait_div") {
 					sw("menu_div");
-					}
 				}
 			}
-		else
-			{
+		} else {
 			console.log("wrong message number: "+req_counter+" / "+a[0]);
-			}
-//		document.getElementById("infodiv").innerHTML=b_recv+"<br>"+		document.getElementById("infodiv").innerHTML;
-
-
 		}
 	}
+}
 
-
-function login()
-	{
+function login() {
 	var mdata="unid="+unid+"&login=1&uname="+document.getElementById("uname").value+"&upass="+document.getElementById("upass").value;
 	sw("wait_div");
 	send_data(mdata);
-	}
+}
 
-function show_plan()
-	{
+function show_plan() {
 	var mdata="unid="+unid+"&gegma=1&uname="+cuser;
 	sw("wait_div");
 	send_data(mdata);
-	}
+}
 
-
-function del_cmp(cmpid)
-	{
-	if (confirm("დარწმუნებული ხართ რომ გინდათ მონიშნული კომპანიის წაშლა?"))
-		{
+function del_cmp(cmpid) {
+	if (confirm("დარწმუნებული ხართ რომ გინდათ მონიშნული კომპანიის წაშლა?")) {
 		console.log("delcmp: "+cmpid);
 		var mdata="unid="+unid+"&gegma=1&uname="+cuser+"&delcmp="+cmpid;
 		sw("wait_div");
 		send_data(mdata);
-		}
 	}
+}
 </script>
 
   </head>
@@ -704,43 +552,34 @@ function del_cmp(cmpid)
  var MyMap;
  var MyMarker;
 
-	function initMap() 
-		{
-		if (MyLat<30)
-			{
-			MyLat=41.718287;
-			MyLong=44.778728;
-			}
-		var myLatLng = {lat: MyLat, lng: MyLong};
-		if (typeof google!="undefined")
-			{
-			MyMap = new google.maps.Map(document.getElementById('mymap'), {
-			  zoom: 15,
-			  center: myLatLng,
-			  zIndex:70,
-			fullscreenControl: false,
-			streetViewControl: false,
-			mapTypeControl: false,
-			disableDefaultUI: true
-		 });
+function initMap() {
+	if (MyLat<30) {
+		MyLat=41.718287;
+		MyLong=44.778728;
+	}
+	var myLatLng = {lat: MyLat, lng: MyLong};
+	if (typeof google!="undefined") {
+		MyMap = new google.maps.Map(document.getElementById('mymap'), {
+			zoom: 15,
+			center: myLatLng,
+			zIndex:70,
+		fullscreenControl: false,
+		streetViewControl: false,
+		mapTypeControl: false,
+		disableDefaultUI: true
+		});
 
-			MyMarker = new google.maps.Marker({
-			  position: myLatLng,
-			  map: MyMap,
-			});
-
-			}
-		else
-		{
-
+		MyMarker = new google.maps.Marker({
+			position: myLatLng,
+			map: MyMap,
+		});
+	} else {
 		location.reload(); 
-			}
-		
-	
-      }
+	}
+}
 
 //&callback=initMap
-    </script>
+</script>
 
 
 
@@ -750,110 +589,81 @@ function del_cmp(cmpid)
 console.log("cookies: "+document.cookie);
 var cuser="";
 var unid="";
-if (cc("unid")=="")
-	{
+if (cc("unid")=="")	{
 	setc("unid",parseInt(Math.random()*10000000));
-	}
-else
-	{
+} else {
 	unid=cc("unid");
-	}
+}
 
-function check_user()
-	{
-
-	if (cc("username")=="")
-		{
+function check_user() {
+	if (cc("username")=="")	{
 		sw("login_div");
-		}
-	else
-		{	
+	} else {	
 		cuser=cc("username");
 		sw("menu_div");
 		document.getElementById("muname").innerHTML=cuser;
 		send_visits();
-		}
 	}
+}
 
 check_user();
-
-//document.getElementById("infodiv").innerHTML=document.cookie;
-
-
-
-function onRequestSuccess( success)
-	{
+function onRequestSuccess( success) {
     console.log("Successfully requested accuracy "+success.message);
 	var k=success.message;
 	var b=k.split("agreed");
-	if (b.length>1)
-		{
+	if (b.length>1) {
 		// aplikaciis restarti tu motxovna gaxda sachiro da userma ok utxra
 		location.reload();
-		}
-    }
-
-function onRequestFailure(error)
-	{
-    console.log("Accuracy request failed: error code="+error.code+"; error message="+error.message);
 	}
+}
 
-function req_loc_acc()
-	{
+function onRequestFailure(error) {
+    console.log("Accuracy request failed: error code="+error.code+"; error message="+error.message);
+}
+
+function req_loc_acc() {
 	var accuracy = 3;
 	var accuracyName  = "High Accuracy";
 	console.log("requesting acc");
 	cordova.plugins.locationAccuracy.request(onRequestSuccess, onRequestFailure, cordova.plugins.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY);
-	}
+}
 
-function req_loc_auth()
-	{
+function req_loc_auth()	{
 	console.log("requesting auth");
 	cordova.plugins.diagnostic.isLocationAuthorized(function (authorized) {
-            if(!authorized)
-				{
-
+            if(!authorized) {
                 cordova.plugins.diagnostic.requestLocationAuthorization(function (status) {console.log("Requested location authorization: authorization was " + status);}, errorFunction, cordova.plugins.diagnostic.locationAuthorizationMode.ALWAYS);
-				}
-			else
-				{
+			} else {
                 errorFunction(1);
-	            }
+	        }
 		}, errorFunction);
-	}
+}
 
+function evaluateMode(mode)	{
+	document.getElementById("curlocmode").innerHTML=mode; 
+}
 
-function checkState()
-	{
+function checkState() {
     console.log("Checking location state...");
-
-    function evaluateMode(mode)
-		{
-        document.getElementById("curlocmode").innerHTML=mode; 
-	    }
+    
     cordova.plugins.diagnostic.getLocationMode(evaluateMode, onError);
 	}
 
-function onError(error)
-	{
+function onError(error)	{
 	console.error(error);
+}
 
-	}
-
-function errorFunction(error)
-	{
+function errorFunction(error) {
 	console.error(error);
-	if (error!=1)
-		{
+	if (error!=1) {
 		req_loc_acc();
 		req_loc_auth();
-		}
 	}
+}
 
-function open_loc_settings()
-	{
+function open_loc_settings() {
 	cordova.plugins.diagnostic.switchToLocationSettings();
-	}
+}
 
 setTimeout("main_func();",3000);
 </script>
