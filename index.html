@@ -483,7 +483,7 @@ function del_cmp(cmpid) {
 		<Td><a class="test" href="Javascript: scan_bar_code();">
 			<div class="d-flex align-items-center h-50 justify-content-center">
 				<div class="menuItem">
-					<img src="assets/img/camera.svg" width="64"><br/>
+					<img src="assets/img/scan.png" width="64"><br/>
 					სკანირება
 				</div>
 			</div>
@@ -491,7 +491,7 @@ function del_cmp(cmpid) {
 		<Td><a class="test" href="Javascript: checkin();">
 			<div class="d-flex align-items-center h-50 justify-content-center">
 				<div class="menuItem">
-					<img src="assets/img/camera.svg" width="64"><br/>
+					<img src="assets/img/cheqin.png" width="64"><br/>
 					Check in
 				</div>
 			</div>
@@ -520,18 +520,26 @@ function del_cmp(cmpid) {
 <div id='inside_checkin_div'  class="container content" style="display:none; padding:15px; position:absolute; top:0px;left:0px; width:100%; height:100%; z-index:100;">
 	<table width=100%>
 		<tr>
-		<Td><a class="test" href="Javascript: scan_object();">
+		<Td align=center valign=middle><a class="test" href="Javascript: scan_object();">
 			<div class="d-flex align-items-center h-50 justify-content-center">
 				<div class="menuItem">
-					<img src="assets/img/camera.svg" width="64"><br/>
+					<img src="assets/img/scan.png" width="64"><br/>
 					ინვენტარის სკანირება
 				</div>
 			</div>
 		</a></td>
-		<Td><a class="test" href="Javascript: checkout();">
+		<Td align=center valign=middle><a class="test" href="Javascript: take_photo();">
 			<div class="d-flex align-items-center h-50 justify-content-center">
 				<div class="menuItem">
-					<img src="assets/img/camera.svg" width="64"><br/>
+					<img src="assets/img/foto.png" width="64"><br/>
+					სურათის გადაღება
+				</div>
+			</div>
+		</a></td>
+		<Td align=center valign=middle><a class="test" href="Javascript: checkout();">
+			<div class="d-flex align-items-center h-50 justify-content-center">
+				<div class="menuItem">
+					<img src="assets/img/checkout.png" width="64"><br/>
 					Check OUT
 				</div>
 			</div>
@@ -547,10 +555,46 @@ function del_cmp(cmpid) {
 </div>
 
 
- <script>
+<script>
 
- var MyMap;
- var MyMarker;
+function camera_take_picture(){
+	navigator.camera.getPicture(uploadPhoto, loose, { quality: 50, destinationType: Camera.DestinationType.FILE_URL});
+}
+
+
+
+function uploadPhoto(imageURI) {
+    var options = new FileUploadOptions();
+    options.fileKey="file";
+    options.fileName=imageURI.substr(imageURI.lastIndexOf('/')+1); //+'.png';
+    options.mimeType="image/jpeg";//"text/plain";
+
+ 
+	var params = {};
+	params.value1 = "test";
+	params.value2 = "param";
+
+                options.chunkedMode = false;
+    options.params = params;
+
+    var ft = new FileTransfer();
+    ft.upload(imageURI, encodeURI("https://smartgps.ge/barcode/getimage.php"), win, loose, options);
+}
+
+function win(r) {
+    console.log("Code = " + r.responseCode);
+    console.log("Response = " + r.response);
+    console.log("Sent = " + r.bytesSent);
+}
+
+function loose(error) {
+    alert("An error has occurred: Code = " + error.code);
+    console.log("upload error source " + error.source);
+    console.log("upload error target " + error.target);
+}
+
+var MyMap;
+var MyMarker;
 
 function initMap() {
 	if (MyLat<30) {

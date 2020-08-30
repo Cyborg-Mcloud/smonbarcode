@@ -37,6 +37,7 @@
 <preference name="android-minSdkVersion"      value="18" />         
 <preference name="android-installLocation"    value="auto" />
 <preference name="EnableViewportScale"    value="true" />
+<preference name="AndroidPersistentFileLocation" value="Compatibility" />
 
 
 	<description>
@@ -86,13 +87,13 @@
 <gap:plugin name="cordova-plugin-camera" source="npm"  />
 <gap:plugin name="cordova-plugin-device" source="npm" />
 
-	<gap:plugin name="cordova-plugin-inappbrowser"  source="npm" />
-	<gap:plugin name="cordova-plugin-whitelist" source="npm" />
-	<feature name="http://api.phonegap.com/1.0/file" />
+<gap:plugin name="cordova-plugin-inappbrowser"  source="npm" />
+<gap:plugin name="cordova-plugin-whitelist" source="npm" />
+<feature name="http://api.phonegap.com/1.0/file" />
 
-	<gap:plugin name="cordova-plugin-inappbrowser"  source="npm" />
+<gap:plugin name="cordova-plugin-inappbrowser"  source="npm" />
 <plugin name="cordova-plugin-globalization" source="npm" />
-
+<plugin name="cordova-plugin-file-transfer" spec="1" source="npm" />
 
 <plugin name="cordova-plugin-dialogs" spec="^1.3.4"/>
 	<plugin name="cordova-android-support-gradle-release" spec="^1.1.1">
