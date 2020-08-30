@@ -8,7 +8,7 @@
     <title>SMonBarcode</title>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFY47FE__z9AvRLBoYG0T2XeOTiHdwzOQ"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAoqs3yEVP6M8GvP_-OUPhLOYUfK73KDR8"></script>
 <link href="assets/css/style.css" rel="stylesheet">
 <link href="assets/css/icomoon.css" rel="stylesheet">
 <link href="assets/css/bootstrap.css" rel="stylesheet">
@@ -517,10 +517,10 @@ function del_cmp(cmpid) {
 </div>
 
 
-<div id='inside_checkin_div'  class="container content" style="display:none; padding:15px; position:absolute; top:0px;left:0px; width:100%; height:100%; z-index:100;">
+<div id='inside_checkin_div'  class="container content" style="display:none; padding:0px !important; position:absolute; top:0px;left:0px; width:100%; height:100%; z-index:100;">
 	<table width=100% border=1>
 		<tr>
-		<Td align=center valign=middle><a class="test" href="Javascript: scan_object();">
+		<Td align=center valign=middle width=33%><a class="test" href="Javascript: scan_object();">
 			<div class="d-flex align-items-center h-50 justify-content-center">
 				<div class="menuItem">
 					<img src="assets/img/scan.png" width="64"><br/>
@@ -528,7 +528,7 @@ function del_cmp(cmpid) {
 				</div>
 			</div>
 		</a></td>
-		<Td align=center valign=middle><a class="test" href="Javascript: take_photo();">
+		<Td align=center valign=middle width=34%><a class="test" href="Javascript: take_photo();">
 			<div class="d-flex align-items-center h-50 justify-content-center">
 				<div class="menuItem">
 					<img src="assets/img/foto.png" width="64"><br/>
@@ -536,7 +536,7 @@ function del_cmp(cmpid) {
 				</div>
 			</div>
 		</a></td>
-		<Td align=center valign=middle><a class="test" href="Javascript: checkout();">
+		<Td align=center valign=middle width=33%><a class="test" href="Javascript: checkout();">
 			<div class="d-flex align-items-center h-50 justify-content-center">
 				<div class="menuItem">
 					<img src="assets/img/checkout.png" width="64"><br/>
@@ -544,7 +544,7 @@ function del_cmp(cmpid) {
 				</div>
 			</div>
 		</a></td>
-		<Td>
+		
 		</tr>
 	</table>
 </div>
@@ -601,6 +601,7 @@ function initMap() {
 		MyLat=41.718287;
 		MyLong=44.778728;
 	}
+	console.log("loading google maps: "+MyLat+" / "+MyLong);
 	var myLatLng = {lat: MyLat, lng: MyLong};
 	if (typeof google!="undefined") {
 		MyMap = new google.maps.Map(document.getElementById('mymap'), {
@@ -617,6 +618,7 @@ function initMap() {
 			position: myLatLng,
 			map: MyMap,
 		});
+		console.log("maps loaded");
 	} else {
 		location.reload(); 
 	}
