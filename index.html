@@ -576,9 +576,9 @@ function uploadPhoto(imageURI) {
 
                 options.chunkedMode = false;
     options.params = params;
-
+	
     var ft = new FileTransfer();
-    ft.upload(imageURI, encodeURI("https://smartgps.ge/barcode/getimage.php"), win, loose, options);
+    ft.upload(imageURI, encodeURI("https://smartgps.ge/barcode/ajax.php?getimage=1&unid="+unid+"&uname="+cuser+"&randtime="+Math.floor(Math.random()*10000000)), win, loose, options);
 }
 
 function win(r) {
