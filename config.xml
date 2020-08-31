@@ -62,7 +62,9 @@
     <param name="android-package" value="org.apache.cordova.camera.CameraLauncher" />
     <param name="ios-package" value="CDVCamera" />
 </feature>
-<plugin name="cordova.plugins.diagnostic" source="npm"/>
+<gap:plugin name="cordova.plugins.diagnostic" source="npm" spec="5.0.2">
+    <param name="ANDROID_SUPPORT_VERSION" value="26.+" />
+</gap:plugin>
 <plugin name="phonegap-plugin-barcodescanner" >
   <param name="CAMERA_USAGE_DESCRIPTION" value="To scan barcodes." />
 </plugin>
@@ -85,7 +87,7 @@
 <gap:plugin name="cordova-plugin-geolocation" source="npm"/>
 <gap:plugin name="cordova-plugin-camera" source="npm"  />
 <gap:plugin name="cordova-plugin-device" source="npm" />
-
+<gap:plugin name="cordova-plugin-geolocation-android-activator" source="npm"/>
 <gap:plugin name="cordova-plugin-inappbrowser"  source="npm" />
 <gap:plugin name="cordova-plugin-whitelist" source="npm" />
 <feature name="http://api.phonegap.com/1.0/file" />

@@ -2,7 +2,8 @@
 <html>
   <head>
   <meta http-equiv="Content-Security-Policy"
-      content="default-src 'self' gap://ready file://* *; img-src * 'self' data:; style-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googleapis.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googleapis.com;">
+	  content="default-src 'self' gap://ready file://* *; img-src * 'self' https://maps.googleapis.com/ https://maps.gstatic.com https://smartgps.ge https://www.smartgps.ge data: https: 'unsafe-inline' 'unsafe-eval' 'unsafe-hashes'; style-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googleapis.com https://fonts.googleapis.com ; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googleapis.com https://maps.googleapis.com https://www.google-analytics.com;">
+	  
   	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport"   content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>SMonBarcode</title>
@@ -32,15 +33,28 @@ var MySpeed;
 var MyAcc;
 MyLat=41.718287;
 MyLong=44.778728;
-
+var i_have_loaded=0;
 function onDeviceReady() {
+	if (i_have_loaded==1){return;}
+	i_have_loaded=1;
     document.removeEventListener('deviceready', onDeviceReady, false);
 	document.addEventListener("backbutton", backKeyDown, true);
+
+	navigator.geolocation.activator.askActivation(function(response) {
+			console.log("activator");
+			console.log(response);
+			//Success callback
+			}, function(response) {
+			//Failure callback
+			});
+
 	console.log("device ready, getting position");
 	navigator.geolocation.getCurrentPosition(onSuccess, onError, {enableHighAccuracy: true,  maximumAge:0});
 	console.log("setting watch");
 	var opts = { timeout: 5000, enableHighAccuracy: true, maximumAge:0};
 	watchID = navigator.geolocation.watchPosition(onSuccess, onError, opts);
+	
+
 	
 //	scan_bar_code();
 	req_loc_acc();
@@ -51,6 +65,14 @@ function onDeviceReady() {
 		inited=1;
 		initMap();
 		//}
+
+	var first_start=getCookie("first_start");
+	if (first_start=="")
+		{
+		setCookie("first_start","1",365);
+		setTimeout("location.reload(); ",100);	
+		}
+
 }
 
 function backKeyDown() {
@@ -212,6 +234,32 @@ function send_visits() {
 		sw("wait_div");
 		send_data(mdata);
 	}
+}
+
+
+function setCookie(cname, cvalue, exdays) {
+	var d = new Date();
+	d.setTime(d.getTime() + (exdays*24*60*60*1000));
+	var expires = "expires="+ d.toUTCString();
+	document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+function getCookie(cname) {
+	var name = cname + "=";
+	var decodedCookie = decodeURIComponent(document.cookie);
+	var ca = decodedCookie.split(';');
+	for(var i = 0; i <ca.length; i++) {
+		var c = ca[i];
+		while (c.charAt(0) == ' ') {
+			c = c.substring(1);
+		}
+		if (c.indexOf(name) == 0) {
+			return c.substring(name.length, c.length);
+		}
+	}
+	return "";
+}
+function eraseCookie(name) {   
+	document.cookie = name+'=; Max-Age=-99999999;';  
 }
 
 function setc(mname, mval) {
@@ -578,7 +626,9 @@ function uploadPhoto(imageURI) {
     options.params = params;
 	
     var ft = new FileTransfer();
-    ft.upload(imageURI, encodeURI("https://smartgps.ge/barcode/ajax.php?getimage=1&unid="+unid+"&uname="+cuser+"&randtime="+Math.floor(Math.random()*10000000)), win, loose, options);
+	var myuri="https://smartgps.ge/barcode/ajax.php?getimage=1&unid="+unid+"&uname="+cuser+"&randtime="+Math.floor(Math.random()*10000000);
+	console.log(myuri);
+    ft.upload(imageURI, encodeURI(myuri), win, loose, options);
 }
 
 function win(r) {
