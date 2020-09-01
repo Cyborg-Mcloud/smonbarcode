@@ -294,9 +294,11 @@ function sw(mscr) {
 	document.getElementById("gegma_div").style.display="none";
 	document.getElementById("checkin_div").style.display="none";
 	document.getElementById("inside_checkin_div").style.display="none";
+	if (mscr!="inside_checkin_div"){
+		document.getElementById("images").innerHTML="";
+	}
 	document.getElementById(mscr).style.display="inline";
 
-	document.getElementById("images").innerHTML="";
 }
 
 function logout() {
