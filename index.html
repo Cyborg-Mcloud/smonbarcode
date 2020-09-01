@@ -595,6 +595,11 @@ function del_cmp(cmpid) {
 		
 		</tr>
 	</table>
+	<form method=POST action='https://smartgps.ge/barcode/ajax.php?getimage=1'  enctype="multipart/form-data">
+	<input name='file' id='file' type='file'><br>
+	<input name='mtitle' id='mtitle' value='chemikai'><Br>
+		<input type='submit'>
+	</form>
 </div>
 
 
@@ -620,7 +625,7 @@ function uploadPhoto(imageURI) {
     var options = new FileUploadOptions();
 	options.fileKey = "file";
     options.fileName = imageURI.substr(imageURI.lastIndexOf('/') + 1);
-    options.mimeType = "image/jpeg";
+    options.mimeType = "multipart/form-data";
 	options.httpMethod="POST";
 	options.chunkedMode=false;
     //options.fileKey="file";
