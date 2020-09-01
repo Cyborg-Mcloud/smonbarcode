@@ -619,7 +619,7 @@ function take_photo(){
 function uploadPhoto(imageURI) {
     var options = new FileUploadOptions();
 	options.fileKey = "file";
-    options.fileName = fileURI.substr(imageURI.lastIndexOf('/') + 1);
+    options.fileName = imageURI.substr(imageURI.lastIndexOf('/') + 1);
     options.mimeType = "image/jpeg";
     //options.fileKey="file";
     //options.fileName=imageURI.substr(imageURI.lastIndexOf('/')+1); //+'.png';
