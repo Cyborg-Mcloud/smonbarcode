@@ -606,29 +606,39 @@ function del_cmp(cmpid) {
 <script>
 
 function take_photo(){
-	navigator.camera.getPicture(uploadPhoto, loose, { quality: 50, destinationType: Camera.DestinationType.FILE_URL});
+	navigator.camera.getPicture(uploadPhoto, loose, { 
+		quality: 50, 
+		destinationType: Camera.DestinationType.FILE_URL,
+		sourceType: Camera.PictureSourceType.CAMERA,
+		encodingType: Camera.EncodingType.JPEG
+		});
 }
 
 
 
 function uploadPhoto(imageURI) {
     var options = new FileUploadOptions();
-    options.fileKey="file";
-    options.fileName=imageURI.substr(imageURI.lastIndexOf('/')+1); //+'.png';
-    options.mimeType="image/jpeg";//"text/plain";
+	options.fileKey = "file";
+    options.fileName = fileURI.substr(imageURI.lastIndexOf('/') + 1);
+    options.mimeType = "image/jpeg";
+    //options.fileKey="file";
+    //options.fileName=imageURI.substr(imageURI.lastIndexOf('/')+1); //+'.png';
+    //options.mimeType="image/jpeg";//"text/plain";
 
+	console.log("file: "+imageURI);
  
 	var params = {};
 	params.value1 = "test";
 	params.value2 = "param";
 
-                options.chunkedMode = false;
+    options.chunkedMode = true;
     options.params = params;
+	
 	
     var ft = new FileTransfer();
 	var myuri="https://smartgps.ge/barcode/ajax.php?getimage=1&unid="+unid+"&uname="+cuser+"&randtime="+Math.floor(Math.random()*10000000);
 	console.log(myuri);
-    ft.upload(imageURI, encodeURI(myuri), win, loose, options);
+    ft.upload(imageURI, encodeURI(myuri), win, loose, options, true);
 }
 
 function win(r) {
