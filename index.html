@@ -595,7 +595,7 @@ function del_cmp(cmpid) {
 		
 		</tr>
 	</table>
-	<form method=POST action='https://smartgps.ge/barcode/ajax.php?getimage=1'  enctype="multipart/form-data">
+	<form method=POST action='https://www.smartgps.ge/barcode/ajax.php?getimage=1'  enctype="multipart/form-data">
 	<input name='file' id='file' type='file'><br>
 	<input name='mtitle' id='mtitle' value='chemikai'><Br>
 		<input type='submit'>
@@ -625,7 +625,7 @@ function uploadPhoto(imageURI) {
     var options = new FileUploadOptions();
 	options.fileKey = "file";
     options.fileName = imageURI.substr(imageURI.lastIndexOf('/') + 1);
-    options.mimeType = "multipart/form-data";
+    options.mimeType = "image/jpeg"; //"multipart/form-data";
 	options.httpMethod="POST";
 	options.chunkedMode=false;
     //options.fileKey="file";
@@ -642,7 +642,7 @@ function uploadPhoto(imageURI) {
 	
 	
     var ft = new FileTransfer();
-	var myuri="https://smartgps.ge/barcode/ajax.php?getimage=1&unid="+unid+"&uname="+cuser+"&randtime="+Math.floor(Math.random()*10000000);
+	var myuri="https://www.smartgps.ge/barcode/ajax.php?getimage=1&unid="+unid+"&uname="+cuser+"&randtime="+Math.floor(Math.random()*10000000);
 	console.log(myuri);
     ft.upload(imageURI, encodeURI(myuri), win, loose, options, true);
 }
