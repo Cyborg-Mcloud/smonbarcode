@@ -295,6 +295,8 @@ function sw(mscr) {
 	document.getElementById("checkin_div").style.display="none";
 	document.getElementById("inside_checkin_div").style.display="none";
 	document.getElementById(mscr).style.display="inline";
+
+	document.getElementById("images").innerHTML="";
 }
 
 function logout() {
@@ -566,6 +568,7 @@ function del_cmp(cmpid) {
 
 
 <div id='inside_checkin_div'  class="container content" style="display:none; padding:0px !important; position:absolute; top:0px;left:0px; width:100%; height:100%; z-index:100;">
+	<br><br><br>
 	<table width=100% border=1>
 		<tr>
 		<Td align=center valign=middle width=33%><a class="test" href="Javascript: scan_object();">
@@ -595,11 +598,12 @@ function del_cmp(cmpid) {
 		
 		</tr>
 	</table>
-	<form method=POST action='https://www.smartgps.ge/barcode/ajax.php?getimage=1'  enctype="multipart/form-data">
-	<input name='file' id='file' type='file'><br>
-	<input name='mtitle' id='mtitle' value='chemikai'><Br>
-		<input type='submit'>
-	</form>
+	<Br>
+	<div id='images' style='width:100%;'>
+
+
+	</div>
+
 </div>
 
 
@@ -615,7 +619,8 @@ function take_photo(){
 		quality: 50, 
 		destinationType: Camera.DestinationType.FILE_URL,
 		sourceType: Camera.PictureSourceType.CAMERA,
-		encodingType: Camera.EncodingType.JPEG
+		encodingType: Camera.EncodingType.JPEG,
+		correctOrientation: true
 		});
 }
 
@@ -632,13 +637,13 @@ function uploadPhoto(imageURI) {
     //options.fileName=imageURI.substr(imageURI.lastIndexOf('/')+1); //+'.png';
     //options.mimeType="image/jpeg";//"text/plain";
 
-	console.log("file: "+imageURI);
+//	console.log("file: "+imageURI);
  
-	var params = {};
-	params.value1 = "test";
-	params.value2 = "param";
+//	var params = {};
+//	params.value1 = "test";
+//	params.value2 = "param";
 
-    options.params = params;
+ //   options.params = params;
 	
 	
     var ft = new FileTransfer();
@@ -651,6 +656,8 @@ function win(r) {
     console.log("Code = " + r.responseCode);
     console.log("Response = " + r.response);
     console.log("Sent = " + r.bytesSent);
+	var myimg=r.response;
+	document.getElementById("images").innerHTML+="<img src='"+myimg+"' style='float:left; margin:10px; border-radius:10px; height:80px'>";
 }
 
 function loose(error) {
