@@ -115,6 +115,7 @@ function checkout() {
 		var mdata="unid="+unid+"&uname="+cuser+"&checkout="+nscan;
 		sw("wait_div");
 		send_data(mdata);	
+		document.getElementById("images").innerHTML="";
 	}	
 }
 
@@ -294,9 +295,7 @@ function sw(mscr) {
 	document.getElementById("gegma_div").style.display="none";
 	document.getElementById("checkin_div").style.display="none";
 	document.getElementById("inside_checkin_div").style.display="none";
-	if (mscr!="inside_checkin_div"){
-		document.getElementById("images").innerHTML="";
-	}
+
 	document.getElementById(mscr).style.display="inline";
 
 }
@@ -416,8 +415,10 @@ function brain_recv() {
 					if (a[3]=="checkout") {
 						console.log("showing checkout");
 						sw("inside_checkin_div");
+						
 					} else {	
 						sw("menu_div");
+						
 					}
 				}	
 			} else if (a[1]=="object_done") {
