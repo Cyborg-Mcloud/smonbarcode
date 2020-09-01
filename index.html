@@ -621,6 +621,8 @@ function uploadPhoto(imageURI) {
 	options.fileKey = "file";
     options.fileName = imageURI.substr(imageURI.lastIndexOf('/') + 1);
     options.mimeType = "image/jpeg";
+	options.httpMethod="POST";
+	options.chunkedMode=false;
     //options.fileKey="file";
     //options.fileName=imageURI.substr(imageURI.lastIndexOf('/')+1); //+'.png';
     //options.mimeType="image/jpeg";//"text/plain";
@@ -631,7 +633,6 @@ function uploadPhoto(imageURI) {
 	params.value1 = "test";
 	params.value2 = "param";
 
-    options.chunkedMode = true;
     options.params = params;
 	
 	
